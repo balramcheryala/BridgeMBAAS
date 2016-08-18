@@ -35,4 +35,10 @@ public class CrudServiceImpl implements CrudService {
 		crudDao.deleteStudent(crud);
 	}
 
+	@Override
+	public void update(Crud crud) {
+		crudDao.update(crud);
+		
+	}
+
 }

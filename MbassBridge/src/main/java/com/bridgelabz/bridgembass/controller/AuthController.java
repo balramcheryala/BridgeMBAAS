@@ -11,15 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class AuthController {
 
-	// New User
-	@RequestMapping(value = { "/newuser" }, method = RequestMethod.GET)
-	public ModelAndView newUser() {
-		ModelAndView model = new ModelAndView();
-		model.addObject("title", "BRIDGEMBASS");
-		model.addObject("user", getUser());
-		model.setViewName("newuser");
-		return model;
-	}
+	
 
 	//dashboard
 	@RequestMapping(value = { "/dashboard" }, method = RequestMethod.GET)
@@ -34,7 +26,7 @@ public class AuthController {
 	@RequestMapping(value = { "/signinby" }, method = RequestMethod.GET)
 	public ModelAndView signInBy() {
 		ModelAndView model = new ModelAndView();
-		model.addObject("title", "BRIDGEMBASS");
+		model.addObject("title", "BRIDGEMBAAS");
 		model.addObject("user", getUser());
 		model.setViewName("sign-in");
 		return model;

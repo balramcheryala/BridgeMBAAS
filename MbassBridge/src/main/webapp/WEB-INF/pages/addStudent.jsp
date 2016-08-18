@@ -30,25 +30,25 @@ button {
 			        <td><form:input path="id" value="${crud.id}" readonly="true"/></td>
 			    </tr>
 			    <tr>
-			        <td><form:label path="fname">Email:</form:label></td>
-			        <td><form:input path="fname" value="${crud.email}"/></td>
+			        <td><form:label path="email">Email:</form:label></td>
+			        <td><form:input path="email" value="${crud.email}"/></td>
 			    </tr>
 			     <tr>
-			        <td><form:label path="lname">Providers:</form:label></td>
-			        <td><form:input path="lname" value="${crud.providers}"/></td>
+			        <td><form:label path="providers">Providers:</form:label></td>
+			        <td><form:input path="providers" value="${crud.providers}"/></td>
 			    </tr>
 			    <tr>
-			        <td><form:label path="rnumber">Created:</form:label></td>
-			        <td><form:input path="rnumber" value="${crud.created}"/></td>
+			        <td><form:label path="created">Created:</form:label></td>
+			        <td><form:input path="created" value="${crud.created}"/></td>
 			    </tr>
 			    <tr>
-			        <td><form:label path="mobile">Signed In:</form:label></td>
-			        <td><form:input path="mobile" value="${crud.signedin}"/></td>
+			        <td><form:label path="signedin">Signed In:</form:label></td>
+			        <td><form:input path="signedin" value="${crud.signedin}"/></td>
 			    </tr>
 			    
 			    <tr>
-			        <td><form:label path="address"> User UID:</form:label></td>
-                    <td><form:input path="address" value="${crud.useruid}"/></td>
+			        <td><form:label path="useruid"> User UID:</form:label></td>
+                    <td><form:input path="useruid" value="${crud.useruid}"/></td>
 			    </tr>
 			    <tr>
 			      <td colspan="2"><button type="submit"  class="button">Sumbit</button></td>

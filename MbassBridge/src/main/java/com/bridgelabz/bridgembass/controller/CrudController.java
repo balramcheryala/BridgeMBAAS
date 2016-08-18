@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,15 @@ public class CrudController {
 	@Autowired
 	private CrudService crudService;
 
+	@RequestMapping(value = { "/userpage" }, method = RequestMethod.GET)
+	public ModelAndView listStudents() {
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("students", prepareListofBean(crudService.listStudents()));
+		
+		return new ModelAndView("user", model);
+	}
+
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveStudent(@ModelAttribute("command") CrudBean crudBean, BindingResult result) {
 
@@ -30,7 +40,17 @@ public class CrudController {
 
 		crudService.addStudent(crud);
 
-		return new ModelAndView("regsuc");
+		return new ModelAndView("redirect:userpage");
+	}
+
+	// New User
+	@RequestMapping(value = { "/newuser" }, method = RequestMethod.GET)
+	public ModelAndView newuser(@ModelAttribute("command") CrudBean crudBean, BindingResult result) {
+
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("students", prepareListofBean(crudService.listStudents()));
+
+		return new ModelAndView("newuser", model);
 	}
 
 	@RequestMapping(value = "/editsave", method = RequestMethod.POST)
@@ -40,32 +60,9 @@ public class CrudController {
 
 		crudService.addStudent(crud);
 
-		return new ModelAndView("editsuc");
+		return new ModelAndView("redirect:userpage");
 	}
 
-	@RequestMapping(value = "/students", method = RequestMethod.GET)
-	public ModelAndView listStudents() {
-
-		Map<String, Object> model = new HashMap<String, Object>();
-
-		model.put("students", prepareListofBean(crudService.listStudents()));
-
-		return new ModelAndView("user", model);
-	}
-
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public ModelAndView updateStudents() {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("students", prepareListofBean(crudService.listStudents()));
-		return new ModelAndView("update", model);
-	}
-
-	@RequestMapping(value = "/deleteop", method = RequestMethod.GET)
-	public ModelAndView delete() {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("students", prepareListofBean(crudService.listStudents()));
-		return new ModelAndView("delete", model);
-	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView addStudent(@ModelAttribute("command") CrudBean crudBean, BindingResult result) {
@@ -86,12 +83,8 @@ public class CrudController {
 	public ModelAndView editStudent(@ModelAttribute("command") CrudBean crudBean, BindingResult result) {
 		System.out.println("delete entered");
 		crudService.deleteStudent(prepareModel(crudBean));
-		System.out.println("deleted");
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("student", null);
-		model.put("students", prepareListofBean(crudService.listStudents()));
 		/* return new ModelAndView("addStudent", model); */
-		return new ModelAndView("delsuc", model);
+		return new ModelAndView("redirect:userpage");
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -99,7 +92,7 @@ public class CrudController {
 
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("student", prepareStudentBean(crudService.getStudent(crudBean.getId())));
-		model.put("students", prepareListofBean(crudService.listStudents()));
+		model.put("crud", prepareListofBean(crudService.listStudents()));
 		return new ModelAndView("editstudent", model);
 	}
 

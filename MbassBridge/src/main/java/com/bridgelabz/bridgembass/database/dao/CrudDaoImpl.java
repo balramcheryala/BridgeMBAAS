@@ -8,15 +8,18 @@ import org.springframework.stereotype.Repository;
 
 import com.bridgelabz.bridgembass.database.model.Crud;
 
-
 @Repository("CrudDao")
 public class CrudDaoImpl implements CrudDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	public void addStudent(Crud crud) {
 		sessionFactory.getCurrentSession().saveOrUpdate(crud);
+	}
+
+	public void update(Crud crud) {
+		sessionFactory.getCurrentSession().update(crud);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -29,9 +32,7 @@ public class CrudDaoImpl implements CrudDao {
 	}
 
 	public void deleteStudent(Crud crud) {
-		sessionFactory.getCurrentSession().createQuery("DELETE FROM Crud WHERE id = "+crud.getId()).executeUpdate();
+		sessionFactory.getCurrentSession().createQuery("DELETE FROM Crud WHERE id = " + crud.getId()).executeUpdate();
 	}
-
-
 
 }

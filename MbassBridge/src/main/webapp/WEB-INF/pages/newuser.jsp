@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <title>${title}</title>
@@ -47,27 +46,21 @@
 											<div class="img"
 												style="background-image: url('assets/faces/3.jpg')"></div>
 										</div>
-										<div class="body-col">
-										
-										</div>
+										<div class="body-col"></div>
 								</a></li>
 								<li><a href="" class="notification-item">
 										<div class="img-col">
 											<div class="img"
 												style="background-image: url('assets/faces/5.jpg')"></div>
 										</div>
-										<div class="body-col">
-											
-										</div>
+										<div class="body-col"></div>
 								</a></li>
 								<li><a href="" class="notification-item">
 										<div class="img-col">
 											<div class="img"
 												style="background-image: url('assets/faces/8.jpg')"></div>
 										</div>
-										<div class="body-col">
-										
-										</div>
+										<div class="body-col"></div>
 								</a></li>
 							</ul>
 							<footer>
@@ -126,42 +119,58 @@
 			</aside>
 			<div class="sidebar-overlay" id="sidebar-overlay"></div>
 			<article class="content item-editor-page">
-			<div class="title-block">
+			<div class="">
 				<h3 class="title">
 					${project} <span class="sparkline bar" data-type="bar"></span>
 				</h3>
 			</div>
 			<div class="auth-content">
 				<p class="text-xs-center">Add Email Id And Password</p>
-				<form id="signup-form" action="authsave" method="POST" novalidate="">
+
+				<form:form method="POST" action="save">
 
 					<div class="form-group">
-						<label for="email">EmailId</label> <input type="email"
-							class="form-control underlined" name="clientid" id="email"
-							placeholder="Enter Email Id " required="">
+						<label for="email">Email</label>
+						<form:input path="email" class="form-control underlined"
+							value="${crud.email}" />
+					</div>
+
+					<div class="form-group">
+						<label for="email">Providers</label>
+						<form:input path="providers" class="form-control underlined"
+							value="${crud.providers}" />
 					</div>
 					<div class="form-group">
-						<label for="password">Password</label> <input type="password"
-							class="form-control underlined" name="secrete" id="password"
-							placeholder="Enter Password" required="">
+						<label for="email">Created</label>
+						<form:input path="created" class="form-control underlined"
+							value="${crud.created}" />
 					</div>
+					<div class="form-group">
+						<label for="email">Signed In</label>
+						<form:input path="signedin" class="form-control underlined"
+							value="${crud.signedin}" />
+					</div>
+					<div class="form-group">
+						<label for="email">User UID</label>
+						<form:input path="useruid" class="form-control underlined"
+							value="${crud.useruid}" />
+					</div>
+
+					<button type="submit" class="btn btn-block btn-primary">Sumbit</button>
+				</form:form>
 			</div>
 
-			<button type="submit" class="btn btn-block btn-primary">Add
-			</button>
+			<!-- Reference block for JS -->
+			<div class="ref" id="ref">
+				<div class="color-primary"></div>
+				<div class="chart">
+					<div class="color-primary"></div>
+					<div class="color-secondary"></div>
+				</div>
+			</div>
+			<script type="text/javascript"
+				src="<c:url value="/resources/js/vendor.js" />"></script>
 		</div>
-	<!-- Reference block for JS -->
-	<div class="ref" id="ref">
-		<div class="color-primary"></div>
-		<div class="chart">
-			<div class="color-primary"></div>
-			<div class="color-secondary"></div>
-		</div>
-	</div>
-	<script type="text/javascript"
-		src="<c:url value="/resources/js/vendor.js" />"></script>
-
-	</div>
 </body>
 
 </html>

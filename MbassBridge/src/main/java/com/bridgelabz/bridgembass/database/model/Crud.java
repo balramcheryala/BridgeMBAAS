@@ -9,10 +9,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "crudtable")
 public class Crud implements Serializable {
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	Date date;
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -32,9 +38,11 @@ public class Crud implements Serializable {
 	private String providers;
 
 	@Column(name = "createdDate")
+	@Temporal(TemporalType.DATE)
 	private Date created;
 
 	@Column(name = "signedinDate")
+	@Temporal(TemporalType.DATE)
 	private Date signedin;
 
 	@Column(name = "useruid")

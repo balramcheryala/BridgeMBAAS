@@ -35,7 +35,7 @@ public class SocialController {
 	}
 
 	// UserPage After Success Login
-	@RequestMapping(value = { "/userpage" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/modelS" }, method = RequestMethod.GET)
 	public ModelAndView userPage() {
 
 		ModelAndView model = new ModelAndView();
