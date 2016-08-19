@@ -10,12 +10,20 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AppAuthenticationEntryPoint.
+ */
 public class AppAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPoint {
 
+	/** The redirect strategy. */
 	private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 	/**
 	 * loginFormUrl URL where the login page can be found.
+	 *
+	 * @param loginFormUrl
+	 *            the login form url
 	 */
 	public AppAuthenticationEntryPoint(final String loginFormUrl) {
 		super(loginFormUrl);
@@ -23,6 +31,17 @@ public class AppAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPoin
 
 	/**
 	 * Performs the redirect (or forward) to the login form URL.
+	 *
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @param authException
+	 *            the auth exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws ServletException
+	 *             the servlet exception
 	 */
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException) throws IOException, ServletException {

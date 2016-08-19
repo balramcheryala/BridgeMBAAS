@@ -13,16 +13,39 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+// TODO: Auto-generated Javadoc
 //@RestController is processed if an appropriate HandlerMapping-HandlerAdapter pair is configured
+/**
+ * The Class SocialController.
+ */
+
 //@RestController annotation that is itself annotated with @Controller and @ResponseBody.
+/**
+ * @author bridgelabz
+ *
+ */
 @RestController
 public class SocialController {
 
 	// Marks a constructor, field, setter method or config method as to be
+	/** The sessionfactory. */
 	// autowired by Spring's dependency injection facilities.
 	@Autowired
 	public SessionFactory sessionfactory;
 
+	/**
+	 * Login.
+	 *
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the model and view
+	 * @throws ServletException
+	 *             the servlet exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	// Landing Page Login
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response)
@@ -34,6 +57,11 @@ public class SocialController {
 		return model;
 	}
 
+	/**
+	 * User page.
+	 *
+	 * @return the model and view
+	 */
 	// UserPage After Success Login
 	@RequestMapping(value = { "/modelS" }, method = RequestMethod.GET)
 	public ModelAndView userPage() {
@@ -45,6 +73,11 @@ public class SocialController {
 		return model;
 	}
 
+	/**
+	 * Access denied page.
+	 *
+	 * @return the model and view
+	 */
 	// Access denied
 	@RequestMapping(value = { "/accessdenied" }, method = RequestMethod.GET)
 	public ModelAndView accessDeniedPage() {
@@ -55,6 +88,11 @@ public class SocialController {
 		return model;
 	}
 
+	/**
+	 * Gets the user.
+	 *
+	 * @return the user
+	 */
 	// getUser
 	private String getUser() {
 		String userName = null;

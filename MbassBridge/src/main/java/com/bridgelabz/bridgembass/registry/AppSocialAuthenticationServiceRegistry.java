@@ -7,10 +7,21 @@ import javax.annotation.PostConstruct;
 import org.springframework.social.security.SocialAuthenticationServiceRegistry;
 import org.springframework.social.security.provider.SocialAuthenticationService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AppSocialAuthenticationServiceRegistry.
+ */
 public class AppSocialAuthenticationServiceRegistry extends SocialAuthenticationServiceRegistry {
 
+	/** The authentication services. */
 	private List<SocialAuthenticationService<?>> authenticationServices;
 
+	/**
+	 * Instantiates a new app social authentication service registry.
+	 *
+	 * @param authenticationServices
+	 *            the authentication services
+	 */
 	public AppSocialAuthenticationServiceRegistry(final List<SocialAuthenticationService<?>> authenticationServices) {
 		this.authenticationServices = authenticationServices;
 	}
@@ -18,6 +29,9 @@ public class AppSocialAuthenticationServiceRegistry extends SocialAuthentication
 	// When the constructor is called, the bean is not yet initialized -
 	// i.e. no dependencies are injected
 	// @PostConstruct method the bean is fully initialized and you can use the
+	/**
+	 * Inits the.
+	 */
 	// dependencies.
 	@PostConstruct
 	public void init() {

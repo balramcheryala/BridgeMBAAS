@@ -16,12 +16,20 @@ import com.bridgelabz.bridgembass.database.model.User;
 import com.bridgelabz.bridgembass.dto.LocalUser;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LocalUserDetailService.
+ */
 @Service("localUserDetailService")
 public class LocalUserDetailService implements UserDetailsService {
 
+    /** The user DAO. */
     @Autowired
     private UserDAO userDAO;
 
+    /* (non-Javadoc)
+     * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
+     */
     @Override
     @Transactional
     public LocalUser loadUserByUsername(final String userId) throws UsernameNotFoundException {
@@ -34,6 +42,13 @@ public class LocalUserDetailService implements UserDetailsService {
                 , true, true, simpleGrantedAuthorities);
     }
 
+    /**
+	 * Builds the simple granted authorities.
+	 *
+	 * @param user
+	 *            the user
+	 * @return the list
+	 */
     private List<SimpleGrantedAuthority> buildSimpleGrantedAuthorities(final User user) {
         List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
         if (user.getRoles() != null) {

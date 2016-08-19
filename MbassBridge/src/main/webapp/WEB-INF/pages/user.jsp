@@ -128,6 +128,8 @@
 
 			<c:if test="${!empty students}">
 			
+						<div class="card items">
+					<ul class="item-list striped">
 						<li class="item item-list-header hidden-sm-down">
 							<div class="item-row">
 								<div class="item-col fixed item-col-check"></div>
@@ -187,7 +189,7 @@
 
 									<div class="item-col item-col-header item-col-title">
 										<div class="item-heading"></div>
-										<div class="no-overflow">${bridge.created}</div>
+										<div class="no-overflow" >${bridge.created}</div>
 									</div>
 									<div class="item-col item-col-header item-col-title">
 

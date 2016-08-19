@@ -14,13 +14,21 @@ import com.bridgelabz.bridgembass.dto.LocalUser;
 import com.bridgelabz.bridgembass.dto.SocialUser;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SocialUserDetailService.
+ */
 @Service("socialUserDetailService")
 public class SocialUserDetailService implements SocialUserDetailsService {
 
+    /** The user detail service. */
     @Autowired
     @Qualifier(value = "localUserDetailService")
     private UserDetailsService userDetailService;
 
+    /* (non-Javadoc)
+     * @see org.springframework.social.security.SocialUserDetailsService#loadUserByUserId(java.lang.String)
+     */
     @Override
     public SocialUserDetails loadUserByUserId(final String userId) throws UsernameNotFoundException, DataAccessException {
         LocalUser user = (LocalUser) userDetailService.loadUserByUsername(userId);

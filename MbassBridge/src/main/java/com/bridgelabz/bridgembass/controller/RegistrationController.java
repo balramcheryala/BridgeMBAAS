@@ -16,35 +16,64 @@ import com.bridgelabz.bridgembass.exception.UserAlreadyExistAuthenticationExcept
 import com.bridgelabz.bridgembass.service.UserService;
 import com.bridgelabz.bridgembass.util.SecurityUtil;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RegistrationController.
+ */
 @RestController
 public class RegistrationController {
 
-    @Autowired
-    private UserService userService;
+	/** The user service. */
+	@Autowired
+	private UserService userService;
 
-    @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public ModelAndView signup(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
-        ModelAndView model = new ModelAndView();
-        model.addObject("title", "User Registration Form");
-        model.setViewName("registration");
-        return model;
-    }
+	/**
+	 * Signup.
+	 *
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the model and view
+	 * @throws ServletException
+	 *             the servlet exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public ModelAndView signup(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		ModelAndView model = new ModelAndView();
+		model.addObject("title", "User Registration Form");
+		model.setViewName("registration");
+		return model;
+	}
 
-    @RequestMapping(value = {"/user/register"}, method = RequestMethod.POST)
-    public @ResponseBody ModelAndView registerUser(@RequestBody UserRegistrationForm registrationForm) throws UserAlreadyExistAuthenticationException {
-        if (registrationForm.getUserId() == null) {
-            registrationForm.setUserId(registrationForm.getUserId());
-        }
+	/**
+	 * Register user.
+	 *
+	 * @param registrationForm
+	 *            the registration form
+	 * @return the model and view
+	 * @throws UserAlreadyExistAuthenticationException
+	 *             the user already exist authentication exception
+	 */
+	@RequestMapping(value = { "/user/register" }, method = RequestMethod.POST)
+	public @ResponseBody ModelAndView registerUser(@RequestBody UserRegistrationForm registrationForm)
+			throws UserAlreadyExistAuthenticationException {
+		if (registrationForm.getUserId() == null) {
+			registrationForm.setUserId(registrationForm.getUserId());
+		}
 
-        LocalUser localUser = (LocalUser) userService.registerNewUser(registrationForm);
+		LocalUser localUser = (LocalUser) userService.registerNewUser(registrationForm);
 
-        SecurityUtil.authenticateUser(localUser);
+		SecurityUtil.authenticateUser(localUser);
 
-        ModelAndView model = new ModelAndView();
-        model.addObject("title", "User");
-        model.addObject("user", localUser.getUsername());
-        model.setViewName("user");
-        return model;
+		ModelAndView model = new ModelAndView();
+		model.addObject("title", "User");
+		model.addObject("user", localUser.getUsername());
+		model.setViewName("user");
+		return model;
 
-    }
+	}
 }

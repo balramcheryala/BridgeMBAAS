@@ -11,8 +11,18 @@ import org.hibernate.cfg.Configuration;
 import com.bridgelabz.bridgembass.database.model.Role;
 import com.bridgelabz.bridgembass.database.model.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SampleUsersDemo.
+ */
 public class SampleUsersDemo {
 
+    /**
+	 * The main method.
+	 *
+	 * @param args
+	 *            the arguments
+	 */
     public static void main(String[] args) {
         URL url = SampleUsersDemo.class.getClassLoader().getResource("test.hibernate.cfg.xml");
         File file = new File(url.getPath());

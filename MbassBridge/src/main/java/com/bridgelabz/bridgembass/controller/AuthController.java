@@ -8,11 +8,20 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AuthController.
+ */
 @RestController
 public class AuthController {
 
 	
 
+	/**
+	 * Dashboard.
+	 *
+	 * @return the model and view
+	 */
 	//dashboard
 	@RequestMapping(value = { "/dashboard" }, method = RequestMethod.GET)
 	public ModelAndView dashboard() {
@@ -22,6 +31,12 @@ public class AuthController {
 		model.setViewName("dashboard");
 		return model;
 	}
+	
+	/**
+	 * Sign in by.
+	 *
+	 * @return the model and view
+	 */
 	// Sign in By
 	@RequestMapping(value = { "/signinby" }, method = RequestMethod.GET)
 	public ModelAndView signInBy() {
@@ -32,6 +47,11 @@ public class AuthController {
 		return model;
 	}
 
+	/**
+	 * Id secure.
+	 *
+	 * @return the model and view
+	 */
 	// id_secure code
 	@RequestMapping(value = { "/id_secure" }, method = RequestMethod.GET)
 	public ModelAndView id_secure() {
@@ -43,6 +63,11 @@ public class AuthController {
 		return model;
 	}
 
+	/**
+	 * Gets the user.
+	 *
+	 * @return the user
+	 */
 	// getUser
 	private String getUser() {
 		String userName = null;

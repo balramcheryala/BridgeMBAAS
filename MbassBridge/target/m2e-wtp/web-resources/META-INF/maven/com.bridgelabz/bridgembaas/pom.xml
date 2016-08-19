@@ -189,7 +189,6 @@
 	</dependencies>
 
 	<build>
-	
 		<resources>
 			<resource>
 				<filtering>true</filtering>

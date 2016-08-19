@@ -15,17 +15,26 @@ import com.bridgelabz.bridgembass.dto.LocalUser;
 import com.bridgelabz.bridgembass.dto.UserRegistrationForm;
 import com.bridgelabz.bridgembass.exception.UserAlreadyExistAuthenticationException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RegistrationUserDetailService.
+ */
 @Service("registrationUserDetailService")
 public class RegistrationUserDetailService implements UserService {
 
+    /** The user detail service. */
     @Autowired
     @Qualifier(value = "localUserDetailService")
     private UserDetailsService userDetailService;
 
+    /** The user DAO. */
     @Autowired
     private UserDAO userDAO;
 
 
+    /* (non-Javadoc)
+     * @see com.bridgelabz.bridgembass.service.UserService#registerNewUser(com.bridgelabz.bridgembass.dto.UserRegistrationForm)
+     */
     @Override
     @Transactional(value = "transactionManager")
     public LocalUser registerNewUser(final UserRegistrationForm userRegistrationForm) throws UserAlreadyExistAuthenticationException {
@@ -42,6 +51,13 @@ public class RegistrationUserDetailService implements UserService {
         return (LocalUser) userDetailService.loadUserByUsername(userRegistrationForm.getUserId());
     }
 
+    /**
+	 * Builds the user.
+	 *
+	 * @param formDTO
+	 *            the form DTO
+	 * @return the user
+	 */
     private User buildUser(final UserRegistrationForm formDTO) {
         User user = new User();
         user.setUserId(formDTO.getUserId());
