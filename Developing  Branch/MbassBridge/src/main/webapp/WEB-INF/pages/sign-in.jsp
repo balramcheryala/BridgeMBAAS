@@ -187,7 +187,7 @@
 								<div class="item-col fixed item-col-img md">
 									<a href="signinby">
 										<div class="item-img rounded"
-											style="background-image: url(http ://www.tutorialspoint.com/images/googlePlusIcon.jpg"></div>
+											style="background-image: url(http://www.tutorialspoint.com/images/googlePlusIcon.jpg"></div>
 									</a>
 								</div>
 								<div class="item-col fixed pull-left item-col-title">
