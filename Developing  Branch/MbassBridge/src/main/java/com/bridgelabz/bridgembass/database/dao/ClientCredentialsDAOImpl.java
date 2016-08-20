@@ -5,8 +5,10 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bridgelabz.bridgembass.database.model.Credentials;
+import com.bridgelabz.bridgembass.database.model.Crud;
 
 /**
  * The Class ClientCredentialsDAOImpl.
@@ -45,8 +47,10 @@ public class ClientCredentialsDAOImpl implements ClientCredentialsDAO {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional(readOnly = true)
 	public List<Credentials> listStudents() {
-		return (List<Credentials>) sessionFactory.openSession().createCriteria(Credentials.class).list();
+
+		return sessionFactory.openSession().createCriteria(Credentials.class).list();
 	}
 
 	/*
@@ -60,16 +64,6 @@ public class ClientCredentialsDAOImpl implements ClientCredentialsDAO {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.bridgelabz.bridgembass.database.dao.ClientCredentialsDAO#
-	 * deleteStudent(com.bridgelabz.bridgembass.database.model.Credentials)
-	 */
-	/*
-	 * @see com.bridgelabz.bridgembass.database.dao.ClientCredentialsDAO#
-	 * deleteStudent(com.bridgelabz.bridgembass.database.model.Credentials)
-	 */
 	@Override
 	public void deleteStudent(Credentials ccd) {
 		sessionFactory.openSession().createQuery("DELETE FROM Credentials WHERE id = " + ccd.getId()).executeUpdate();

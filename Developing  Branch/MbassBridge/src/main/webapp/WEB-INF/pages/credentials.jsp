@@ -125,35 +125,42 @@
 				</h3>
 			</div>
 			<div class="auth-content">
-				<h1 style="color: #FF5733">Edit Data</h1>
-				<form:form method="POST" action="update">
+				<p class="text-xs-center">Add Client Id And Client Password</p>
+
+				<form:form method="POST" action="credsave">
+
 					<div class="form-group">
-						<label for="email">Email</label>
-						<form:input path="email" value="${student.email}"
-							class="form-control underlined" />
-					</div>
-					<div class="form-group">
-						<label for="password">Password</label>
-						<form:input path="password" value="${student.password}"
-							class="form-control underlined" />
+						<label for="email">Client Id</label>
+						<form:input path="clientid" class="form-control underlined"
+							value="${crud.clientid}" />
 					</div>
 
-					<button type="submit" class="btn btn-block btn-primary">Submit</button>
+					<div class="form-group">
+						<label for="password">Client Password</label>
+						<form:input path="clientpassword" class="form-control underlined"
+							value="${crud.clientpassword}" />
+					</div>
+					
+					<button type="submit" class="btn btn-block btn-primary">Sumbit</button>
 				</form:form>
 			</div>
-			</article>
+
+			<!-- Reference block for JS -->
+			<div class="ref" id="ref">
+				<div class="color-primary"></div>
+				<div class="chart">
+					<div class="color-primary"></div>
+					<div class="color-secondary"></div>
+				</div>
+			</div>
+			<script type="text/javascript"
+				src="<c:url value="/resources/js/vendor.js" />"></script>
 		</div>
-	</div>
 </body>
-<!-- Reference block for JS -->
-<div class="ref" id="ref">
-	<div class="color-primary"></div>
-	<div class="chart">
-		<div class="color-primary"></div>
-		<div class="color-secondary"></div>
-	</div>
-</div>
-<script type="text/javascript"
-	src="<c:url value="/resources/js/vendor.js" />"></script>
-</div>
+
 </html>
+
+
+
+
+

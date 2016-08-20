@@ -57,7 +57,7 @@
         <property name="packagesToScan" value="com.bridgelabz.bridgembass"/> 
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.hbm2ddl.auto">
+                <prop key="hibernate.dialect">
                     ${hibernate.dialect}
                 </prop>
                 <prop key="hibernate.hbm2ddl.auto">

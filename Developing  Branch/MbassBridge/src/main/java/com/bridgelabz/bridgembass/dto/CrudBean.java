@@ -1,6 +1,5 @@
 package com.bridgelabz.bridgembass.dto;
 
-import java.util.Date;
 import java.util.UUID;
 
 // TODO: Auto-generated Javadoc

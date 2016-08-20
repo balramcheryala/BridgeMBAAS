@@ -126,15 +126,15 @@
 			</div>
 			<div class="auth-content">
 				<h1 style="color: #FF5733">Edit Data</h1>
-				<form:form method="POST" action="update">
+				<form:form method="POST" action="credupdate">
 					<div class="form-group">
-						<label for="email">Email</label>
-						<form:input path="email" value="${student.email}"
+						<label for="text">ClientId</label>
+						<form:input path="email" value="${student.clientid}"
 							class="form-control underlined" />
 					</div>
 					<div class="form-group">
-						<label for="password">Password</label>
-						<form:input path="password" value="${student.password}"
+						<label for="password">ClientPassword/SecreteCode</label>
+						<form:input path="password" value="${student.clientpassword}"
 							class="form-control underlined" />
 					</div>
 

@@ -1,41 +1,23 @@
-package com.bridgelabz.bridgembass.database.model;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+package com.bridgelabz.bridgembass.dto;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Credentials.
+ * The Class CredentialsBean.
  */
-@Entity
-@Table(name = "Credentials")
-public class Credentials {
+public class CredentialsBean {
 
 	/** The id. */
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Integer id;
+	private int id;
 
-	/** The app ID. */
-	@Column(name = "app_ID")
+	/** The clientid. */
 	private String clientid;
-
-	/** The app secrete. */
-	@Column(name = "app_Secrete")
-	private String clientpassword;
 
 	/**
 	 * Gets the id.
 	 *
 	 * @return the id
 	 */
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -45,7 +27,7 @@ public class Credentials {
 	 * @param id
 	 *            the new id
 	 */
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -87,4 +69,6 @@ public class Credentials {
 		this.clientpassword = clientpassword;
 	}
 
+	/** The clientpassword. */
+	private String clientpassword;
 }

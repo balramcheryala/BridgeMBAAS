@@ -5,7 +5,6 @@
 <html>
 <head>
 <title>${title}</title>
-
 <link rel="stylesheet"
 	href="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.indigo-pink.min.css">
 <link rel="stylesheet"
@@ -18,7 +17,6 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/app-orange.css" />" />
 </head>
-
 <body>
 	<div class="main-wrapper">
 		<div class="app" id="app">
@@ -37,8 +35,6 @@
 					</div>
 				</form>
 			</div>
-
-
 			<div class="header-block header-block-nav">
 				<ul class="nav-profile">
 					<li class="notifications new"><a href=""
@@ -58,11 +54,9 @@
 					<li class="profile dropdown"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
 						role="button" aria-haspopup="true" aria-expanded="false">
-
 							<div class="img"
 								style="background-image: url('http://tinyurl.com/h9uonzq')">
 							</div> <span class="name">${user}</span>
-
 					</a>
 						<div class="dropdown-menu profile-dropdown-menu"
 							aria-labelledby="dropdownMenu1">
@@ -91,7 +85,7 @@
 								class="l l3"></span> <span class="l l4"></span> <span
 								class="l l5"></span>
 						</div>
-						BRIDGEMBAAS
+						${title}
 					</div>
 				</div>
 				<nav class="menu">
@@ -114,123 +108,64 @@
 					<div class="row">
 						<div class="col-md-6">
 							<h3 class="title">
-
 								<a href="newuser" class="btn btn-primary btn-sm rounded-s">
 									Add New </a>
 							</h3>
 						</div>
-
-
 					</div>
 				</div>
 			</div>
-
-
-			<c:if test="${!empty students}">
-			
-						<div class="card items">
-					<ul class="item-list striped">
-						<li class="item item-list-header hidden-sm-down">
-							<div class="item-row">
-								<div class="item-col fixed item-col-check"></div>
-								<div class="item-col item-col-header">
-									<div>
-										<span>Email</span>
+			<div class="card items">
+				<ul class="item-list striped">
+					<li class="item item-list-header hidden-sm-down"><c:if
+							test="${!empty students}">
+							<div class="table">
+								<div class="table-head">
+									<div class="column">Email</div>
+									<div class="column">Providers</div>
+									<div class="column">Created</div>
+									<div class="column">SignedIn</div>
+									<div class="column">UserUID</div>
+									<div class="column"></div>
+									<div
+										class="item-col column item-col-header fixed item-col-actions-dropdown">
 									</div>
 								</div>
-								<div class="item-col item-col-header item-col-title">
-									<div>
-										<span>Providers</span>
-									</div>
-								</div>
-								<div class="item-col item-col-header item-col-title">
-									<div>
-										<span>Created</span>
-									</div>
-								</div>
-								<div class="item-col item-col-header item-col-sales">
-									<div>
-										<span>Signed In</span>
-									</div>
-								</div>
-
-
-								<div class="item-col item-col-header item-col-author">
-									<div class="no-overflow">
-										<span>User UID</span>
-									</div>
-								</div>
-								<div class="item-col item-col-header item-col-date"></div>
-								<div
-									class="item-col item-col-header fixed item-col-actions-dropdown">
-								</div>
-							</div>
-						</li>
-
-
-						<c:forEach items="${students}" var="bridge">
-
-							<li class="item">
-								<div class="item-row">
-
-									<div class="item-col item-col-header item-col-title">
-										<div class="item-heading"></div>
-										<div class="no-overflow">${bridge.email}</div>
-									</div>
-									<div class="item-col item-col-header item-col-title">
-
-										<div></div>
-									</div>
-									<div class="item-col item-col-sales">
-
-										<div>${bridge.providers}</div>
-									</div>
-
-
-									<div class="item-col item-col-header item-col-title">
-										<div class="item-heading"></div>
-										<div class="no-overflow" >${bridge.created}</div>
-									</div>
-									<div class="item-col item-col-header item-col-title">
-
-										<div class="no-overflow">${bridge.signedin}</div>
-									</div>
-									<div class="item-col item-col-header item-col-title">
-
-										<div class="no-overflow">${bridge.useruid}</div>
-									</div>
-									<div class="item-col item-col-date">
-										<div class="no-overflow"></div>
-									</div>
-
-									<div class="item-col fixed item-col-actions-dropdown">
-										<div class="item-actions-dropdown">
-											<a class="item-actions-toggle-btn"> <span
-												class="inactive"> <i class="fa fa-cog"></i>
-											</span> <span class="active"> <i
-													class="fa fa-chevron-circle-right"></i>
-											</span>
-											</a>
-											<div class="item-actions-block">
-												<ul class="item-actions-list">
-													<li><a class="remove" href="delete?id=${bridge.id}">
-															<i class="fa fa-trash-o "></i>
-													</a></li>
-													<li><a class="edit" href="edit?id=${bridge.id}"> <i
-															class="fa fa-pencil"></i>
-													</a></li>
-												</ul>
+								<c:forEach items="${students}" var="bridge">
+									<div class="row">
+										<div class="column">${bridge.email}</div>
+										<div class="column">${bridge.providers}</div>
+										<div class="column">${bridge.created}</div>
+										<div class="column">${bridge.signedin}</div>
+										<div class="column">${bridge.useruid}</div>
+										<div class="item-col fixed item-col-actions-dropdown">
+											<div class="item-actions-dropdown">
+												<a class="item-actions-toggle-btn"> <span
+													class="inactive"> <i class="fa fa-cog"></i>
+												</span> <span class="active"> <i
+														class="fa fa-chevron-circle-right"></i>
+												</span>
+												</a>
+												<div class="item-actions-block">
+													<ul class="item-actions-list">
+														<li><a class="remove" href="delete?id=${bridge.id}">
+																<i class="fa fa-trash-o "></i>
+														</a></li>
+														<li><a class="edit" href="edit?id=${bridge.id}">
+																<i class="fa fa-pencil"></i>
+														</a></li>
+													</ul>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</li>
-						</c:forEach>
-			</c:if> <!-- /.modal-content --></article>
 
+								</c:forEach>
+							</div>
+						</c:if> <!-- /.modal-content -->
+			</article>
 		</div>
 		<!-- /.modal-dialog -->
-
 	</div>
 	<!-- Reference block for JS -->
 	<div class="ref" id="ref">

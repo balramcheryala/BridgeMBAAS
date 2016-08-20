@@ -40,7 +40,7 @@ public class CrudDaoImpl implements CrudDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Crud> listStudents() {
-		return (List<Crud>) sessionFactory.getCurrentSession().createCriteria(Crud.class).list();
+		return  sessionFactory.getCurrentSession().createCriteria(Crud.class).list();
 	}
 
 	/* (non-Javadoc)
