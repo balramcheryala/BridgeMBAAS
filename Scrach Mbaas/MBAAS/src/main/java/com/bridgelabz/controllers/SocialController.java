@@ -19,14 +19,18 @@ import com.bridgelabz.connection.FacebookConnection;
 import com.bridgelabz.connection.GitHubConnection;
 import com.bridgelabz.connection.GoogleConnection;
 import com.bridgelabz.connection.LinkedInConnection;
+import com.bridgelabz.connection.TwitterConnection;
 import com.bridgelabz.graph.FacebookGraph;
 import com.bridgelabz.graph.GitHubGraph;
 import com.bridgelabz.graph.GoogleGraph;
 import com.bridgelabz.graph.LinkedInGraph;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
+import twitter4j.conf.ConfigurationBuilder;
+
 import javax.servlet.http.HttpServlet;
 
 @RestController
@@ -37,6 +41,8 @@ public class SocialController {
 	public SessionFactory sessionfactory;
 	private String code = "";
 	JSONObject jsonObj;
+	public static String CONSUMER_KEY = "M65Cy3KhTd08DOdHeQcLytzg1";
+	public static String CONSUMER_SECRET = "xupjwjeQ2UlhDrhs6Vh4deaNgdkBiCdOYDYA5iErYVT6vHGpfp";
 
 	@RequestMapping(value = "/facebook", method = RequestMethod.GET)
 	public void facebook(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -53,7 +59,7 @@ public class SocialController {
 		Map<String, String> ProfileData = Graph.getGraphData(graph);
 		ServletOutputStream out = res.getOutputStream();
 		out.println("<h1>BRIDGEMBAAS</h1>");
-		out.println("<h2>Application Main Menu</h2>");
+		out.println("<h2>Facebook Application Main Menu</h2>");
 		out.println("<div>Welcome " + ProfileData.get("fullname"));
 		out.println("<div>Your first_name: " + ProfileData.get("first_name"));
 		out.println("<div>Your last_name: " + ProfileData.get("last_name"));
@@ -85,7 +91,7 @@ public class SocialController {
 			System.out.println(name);
 			ServletOutputStream out = res.getOutputStream();
 			out.println("<h1>BRIDGEMBAAS</h1>");
-			out.println("<h2>Application Main Menu</h2>");
+			out.println("<h2>LinkedIn Application Main Menu</h2>");
 			out.println("<div>Welcome " + ProfileData.get("id"));
 			out.println("<div>firstName " + ProfileData.get("firstName"));
 			out.println("<div>headline " + ProfileData.get("headline"));
@@ -114,7 +120,7 @@ public class SocialController {
 		Map<String, String> ProfileData = Graph.getGraphData(graph);
 		ServletOutputStream out = res.getOutputStream();
 		out.println("<h1>BRIDGEMBAAS</h1>");
-		out.println("<h2>Application Main Menu</h2>");
+		out.println("<h2>Google Application Main Menu</h2>");
 		out.println("<div>Welcome " + ProfileData.get("fullname"));
 		out.println("<div>Your first_name: " + ProfileData.get("first_name"));
 		out.println("<div>Your last_name: " + ProfileData.get("last_name"));
@@ -143,7 +149,7 @@ public class SocialController {
 		System.out.println(name);
 		ServletOutputStream out = res.getOutputStream();
 		out.println("<h1>BRIDGEMBAAS</h1>");
-		out.println("<h2>Application Main Menu</h2>");
+		out.println("<h2>Github Application Main Menu</h2>");
 		out.println("<div>Welcome " + ProfileData.get("id"));
 		out.println("<div>login  " + ProfileData.get("login"));
 		out.println("<div>followers_url  " + ProfileData.get("followers_url"));
@@ -158,7 +164,7 @@ public class SocialController {
 	}
 
 	@RequestMapping("/twitter")
-	public void Twitter(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void twitter(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// Get twitter object from session
 		Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
@@ -174,18 +180,47 @@ public class SocialController {
 
 			System.out.println(accessToken);
 			request.getSession().removeAttribute("requestToken");
-
-			System.out.println("getScreenName:" + accessToken.getUserId());
-
-			System.out.println("getScreenName:" + accessToken.getScreenName());
-
-			System.out.println("getToken:" + accessToken.getToken());
-
-			System.out.println("getTokenSecret:" + accessToken.getTokenSecret());
-
+			ServletOutputStream out = response.getOutputStream();
+			out.println("<h1>BRIDGEMBAAS</h1>");
+			out.println("<h2>Twitter Application Main Menu</h2>");
+			out.println("<h2>YourUserId:" + accessToken.getUserId());
+			out.println("<h2>Your ScreenName:" + accessToken.getScreenName());
+			out.println("<h2>Your Token:" + accessToken.getToken());
+			out.println("<h2>Your TokenSecret:" + accessToken.getTokenSecret());
+			
 		} catch (TwitterException e) {
 
 			e.printStackTrace();
 		}
+	}
+	@RequestMapping("/signin")
+	public void twitterSignin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// configure twitter api with consumer key and secret key
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+		cb.setDebugEnabled(true).setOAuthConsumerKey(TwitterConnection.CONSUMER_KEY)
+				.setOAuthConsumerSecret(TwitterConnection.CONSUMER_SECRET);
+		TwitterFactory tf = new TwitterFactory(cb.build());
+		Twitter twitter = tf.getInstance();
+		request.getSession().setAttribute("twitter", twitter);
+		try {
+
+			// setup callback URL
+			StringBuffer callbackURL = request.getRequestURL();
+			int index = callbackURL.lastIndexOf("/");
+			callbackURL.replace(index, callbackURL.length(), "").append("/twitter");
+
+			// get request object and save to session
+			RequestToken requestToken = twitter.getOAuthRequestToken(callbackURL.toString());
+			System.out.println(requestToken);
+			request.getSession().setAttribute("requestToken", requestToken);
+
+			// redirect to twitter authentication URL
+			response.sendRedirect(requestToken.getAuthenticationURL());
+
+		} catch (TwitterException e) {
+			throw new ServletException(e);
+		}
+
 	}
 }

@@ -40,6 +40,13 @@ public class AuthController {
 		model.setViewName("dashboard");
 		return model;
 	}
+	
+	@RequestMapping(value = { "/testdemo" }, method = RequestMethod.GET)
+	public ModelAndView testdemo() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("testdemo");
+		return model;
+	}
 
 	// Sign in By
 	@RequestMapping(value = { "/signinby" }, method = RequestMethod.GET)
