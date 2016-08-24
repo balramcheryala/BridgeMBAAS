@@ -44,6 +44,10 @@ public class FacebookGraph {
 		Map<String, String> fbProfile = new HashMap<String, String>();
 		try {
 			JSONObject json = new JSONObject(FacebookGraph);
+			
+/*			JSONObject json2 =json.getJSONObject("");
+			JSONObject objects = getArray.getJSONObject(i);*/
+			
 			fbProfile.put("id", json.getString("id"));
 			fbProfile.put("fullname", json.getString("name"));
 			if (json.has("first_name"))

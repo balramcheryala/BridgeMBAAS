@@ -17,8 +17,9 @@ public class GoogleConnection {
 	public String getAuthUrl() {
 		String LoginUrl = "";
 		try {
-			LoginUrl = "https://accounts.google.com/o/oauth2/auth?" + "response_type=code&client_id="
-					+ GoogleConnection.GG_APP_ID + "&redirect_uri=" + REDIRECT_URI + "&scope=email%20profile";
+			LoginUrl = "https://accounts.google.com/o/oauth2/auth?" + "&scope=email%20profile" + "&redirect_uri="
+					+ REDIRECT_URI + "&response_type=code&client_id=" + GoogleConnection.GG_APP_ID
+					+ "&nonce=DgkRrHXmyu3KLd0KDdfq";
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -32,8 +33,8 @@ public class GoogleConnection {
 		System.out.println(code);
 		String GraphUrl = "";
 		try {
-			GraphUrl = "https://accounts.google.com/o/oauth2/token?" + "grant_type=authorization_code&code=" + code
-					+ "&client_id=" + GoogleConnection.GG_APP_ID + "&client_secret=" + GG_APP_SECRET + "&redirect_uri="
+			GraphUrl = "https://accounts.google.com/o/oauth2/token?" +"code=" + code+ "grant_type=authorization_code"+
+					"&client_id=" + GoogleConnection.GG_APP_ID + "&client_secret=" + GG_APP_SECRET + "&redirect_uri="
 					+ REDIRECT_URI;
 
 		} catch (Exception e) {

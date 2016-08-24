@@ -20,11 +20,6 @@
 <html>
 <title>${title}</title>
 <head>
-<style type="text/css">
-body {
-	background-size: cover;
-}
-</style>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
@@ -51,13 +46,17 @@ body {
 	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
 	rel="stylesheet">
 </head>
+
 <body>
-		<div class="btn-group">
-			<a class='btn btn-danger disabled'><i class="fa fa-google-plus"
-				style="width: 16px; height: 20px"></i></a> <a class='btn btn-danger'
-				href='<%=google.getAuthUrl()%>' style="width: 12em;"> Sign in
-				with Google</a>
-		</div>
+<center>
+	<br />
+	<br />
+	<div class="btn-group">
+		<a class='btn btn-danger disabled'><i class="fa fa-google-plus"
+			style="width: 16px; height: 20px"></i></a> <a class='btn btn-danger'
+			href='<%=google.getAuthUrl()%>' style="width: 12em;"> Sign in
+			with Google</a>
+	</div>
 	<br />
 	<br />
 	<div class="btn-group">
@@ -91,6 +90,6 @@ body {
 			Twitter</a>
 	</div>
 	<br />
-	<br />
+	<br /></center>
 </body>
 </html>

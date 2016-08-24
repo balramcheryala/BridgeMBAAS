@@ -31,7 +31,7 @@ import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
-import javax.servlet.http.HttpServlet;
+
 
 @RestController
 @EnableWebMvc
@@ -187,12 +187,13 @@ public class SocialController {
 			out.println("<h2>Your ScreenName:" + accessToken.getScreenName());
 			out.println("<h2>Your Token:" + accessToken.getToken());
 			out.println("<h2>Your TokenSecret:" + accessToken.getTokenSecret());
-			
+
 		} catch (TwitterException e) {
 
 			e.printStackTrace();
 		}
 	}
+
 	@RequestMapping("/signin")
 	public void twitterSignin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
