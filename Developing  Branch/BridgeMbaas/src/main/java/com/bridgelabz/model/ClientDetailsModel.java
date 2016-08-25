@@ -57,7 +57,7 @@ public class ClientDetailsModel implements Serializable {
 
 	/** The useruid. */
 	@Column(name = "useruid")
-	private UUID useruid;
+	private String useruid;
 
 	/**
 	 * Gets the id.
@@ -170,18 +170,18 @@ public class ClientDetailsModel implements Serializable {
 	 *
 	 * @return the useruid
 	 */
-	public UUID getUseruid() {
+	public String getUseruid() {
 		return useruid;
 	}
 
 	/**
 	 * Sets the useruid.
 	 *
-	 * @param useruid
+	 * @param string
 	 *            the new useruid
 	 */
-	public void setUseruid(UUID useruid) {
-		this.useruid = useruid;
+	public void setUseruid(String string) {
+		this.useruid = string;
 	}
 
 }

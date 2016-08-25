@@ -9,6 +9,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
+/*
+ * FacebookConnection  
+ * 
+ * */
 public class FacebookConnection {
 
 	public static final String FB_APP_ID = "872311806235774";
@@ -17,6 +21,7 @@ public class FacebookConnection {
 
 	static String accessToken = "";
 
+	// Invoking a authentication url
 	public String getAuthUrl() {
 		String fbLoginUrl = "";
 		try {
@@ -28,6 +33,7 @@ public class FacebookConnection {
 		return fbLoginUrl;
 	}
 
+	// creating a connection to grapghurl
 	public String getGraphUrl(String code) {
 		String fbGraphUrl = "";
 		try {
@@ -40,6 +46,7 @@ public class FacebookConnection {
 		return fbGraphUrl;
 	}
 
+	// getting accesstoken
 	public String getAccessToken(String code) {
 		if ("".equals(accessToken)) {
 			URL fbGraphURL;
@@ -52,11 +59,13 @@ public class FacebookConnection {
 			URLConnection FacebookConnection;
 			StringBuffer b = null;
 			try {
+				// openingConnection of fbgraph url
 				FacebookConnection = fbGraphURL.openConnection();
 				BufferedReader in;
 				in = new BufferedReader(new InputStreamReader(FacebookConnection.getInputStream()));
 				String inputLine;
 				b = new StringBuffer();
+				// reading a accesstoken from jsp page
 				while ((inputLine = in.readLine()) != null)
 					b.append(inputLine + "\n");
 				in.close();
@@ -66,6 +75,7 @@ public class FacebookConnection {
 			}
 
 			accessToken = b.toString();
+			// Validating a AccessToken Got from the APiProvider
 			if (accessToken.startsWith("{")) {
 				throw new RuntimeException("ERROR: Access Token Invalid: " + accessToken);
 			}

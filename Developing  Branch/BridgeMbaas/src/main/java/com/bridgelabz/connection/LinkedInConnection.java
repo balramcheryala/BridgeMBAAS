@@ -12,6 +12,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
+/*
+ * LinkedInConnection 
+ * 
+ * */
 public class LinkedInConnection {
 
 	public static final String APP_ID = "81ofobqq5caolc";

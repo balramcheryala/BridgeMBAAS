@@ -7,6 +7,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+/*
+ * Github Connection 
+ * 
+ * */
 public class GitHubConnection {
 	public static final String GH_APP_ID = "5f6355f6c885df210f9b";
 	public static final String GH_APP_SECRET = "72454ff52dd90e4648ce23aa1748bbb333ff9eac";
@@ -14,6 +18,7 @@ public class GitHubConnection {
 
 	static String accessToken = "";
 
+	// Invoking a authentication url
 	public String getAuthUrl() {
 		String LoginUrl = "";
 		try {
@@ -29,6 +34,7 @@ public class GitHubConnection {
 
 	// Sending Code With Our Client_id & client_SecretCode To Graph_url For
 	// Token
+	// creating a connection to grapghurl
 	public String getGraphUrl(String code) {
 		String GraphUrl = "";
 		try {
@@ -44,6 +50,7 @@ public class GitHubConnection {
 	}
 
 	// Exchanging Code and Generating Access Token Here
+	// getting accesstoken
 	public String getAccessToken(String code) {
 		if ("".equals(accessToken)) {
 			URL GraphURL;
@@ -56,12 +63,14 @@ public class GitHubConnection {
 			URLConnection Connection;
 			StringBuffer b = null;
 			try {
+				// openingConnection of fbgraph url
 				Connection = GraphURL.openConnection();
 
 				BufferedReader in;
 				in = new BufferedReader(new InputStreamReader(Connection.getInputStream()));
 				String inputLine;
 				b = new StringBuffer();
+				// reading a accesstoken from jsp page
 				while ((inputLine = in.readLine()) != null)
 					b.append(inputLine + "\n");
 				in.close();
@@ -71,6 +80,7 @@ public class GitHubConnection {
 			}
 
 			accessToken = b.toString();
+			// Validating a AccessToken Got from the APiProvider
 			if (accessToken.startsWith("{")) {
 				throw new RuntimeException("ERROR: Access Token Invalid: " + accessToken);
 			}

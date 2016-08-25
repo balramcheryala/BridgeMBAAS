@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bridgelabz.dao.ClientCredentialsModelDao;
 import com.bridgelabz.model.ClientCredentialsModel;
 
-@Service("ccs")
+@Service("credentialservice")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class CredentialsServiceImpl implements ClientCredentialservice {
 	@Autowired

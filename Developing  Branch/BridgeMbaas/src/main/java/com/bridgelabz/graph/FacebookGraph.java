@@ -60,6 +60,8 @@ public class FacebookGraph {
 				fbProfile.put("bio", json.getString("bio"));
 			if (json.has("gender"))
 				fbProfile.put("gender", json.getString("gender"));
+			if (json.has("email"))
+				fbProfile.put("email", json.getString("email"));
 		} catch (JSONException e) {
 			e.printStackTrace();
 			throw new RuntimeException("ERROR in parsing FB graph data. " + e);

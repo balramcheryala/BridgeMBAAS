@@ -1,6 +1,5 @@
 package com.bridgelabz.beans;
 
-
 /**
  * The Class CredentialsBean.
  */

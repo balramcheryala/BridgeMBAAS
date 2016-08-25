@@ -6,13 +6,13 @@ import com.bridgelabz.model.ClientDetailsModel;
 
 public interface ClientDetailsDao {
 
-	public void addClientDetails(ClientDetailsModel cdm);
+	public void addClientDetails(ClientDetailsModel clientdetailmodel);
 
-	public void updateClientDetails(ClientDetailsModel cdm);
+	public void updateClientDetails(ClientDetailsModel clientdetailmodel);
 
 	public List<ClientDetailsModel> listClientDetails();
 
 	public ClientDetailsModel getClientDetails(int id);
 
-	public void deleteClientDetails(ClientDetailsModel cdm);
+	public void deleteClientDetails(ClientDetailsModel clientdetailmodel);
 }

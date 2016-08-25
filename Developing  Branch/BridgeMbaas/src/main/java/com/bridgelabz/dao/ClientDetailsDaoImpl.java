@@ -15,12 +15,12 @@ public class ClientDetailsDaoImpl implements ClientDetailsDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public void addClientDetails(ClientDetailsModel cdm) {
-		sessionFactory.openSession().saveOrUpdate(cdm);
+	public void addClientDetails(ClientDetailsModel clientdetailmodel) {
+		sessionFactory.openSession().saveOrUpdate(clientdetailmodel);
 	}
 
-	public void updateClientDetails(ClientDetailsModel cdm) {
-		sessionFactory.openSession().update(cdm);
+	public void updateClientDetails(ClientDetailsModel clientdetailmodel) {
+		sessionFactory.openSession().update(clientdetailmodel);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -32,8 +32,8 @@ public class ClientDetailsDaoImpl implements ClientDetailsDao {
 		return (ClientDetailsModel) sessionFactory.openSession().get(ClientDetailsModel.class, id);
 	}
 
-	public void deleteClientDetails(ClientDetailsModel cdm) {
-		sessionFactory.openSession().createQuery("DELETE FROM ClientDetailsModel WHERE id = " + cdm.getId())
+	public void deleteClientDetails(ClientDetailsModel clientdetailmodel) {
+		sessionFactory.openSession().createQuery("DELETE FROM ClientDetailsModel WHERE id = " + clientdetailmodel.getId())
 				.executeUpdate();
 	}
 

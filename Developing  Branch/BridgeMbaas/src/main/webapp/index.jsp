@@ -1,21 +1,9 @@
-<%@page import="com.bridgelabz.connection.FacebookConnection"%>
 <%@page import="com.bridgelabz.connection.GoogleConnection"%>
-<%@page import="com.bridgelabz.connection.LinkedInConnection"%>
-<%@page import="com.bridgelabz.connection.GitHubConnection"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-	FacebookConnection facebook = new FacebookConnection();
-%>
-<%
 	GoogleConnection google = new GoogleConnection();
-%>
-<%
-	LinkedInConnection linkedin = new LinkedInConnection();
-%>
-<%
-	GitHubConnection github = new GitHubConnection();
 %>
 <html>
 <title>${title}</title>

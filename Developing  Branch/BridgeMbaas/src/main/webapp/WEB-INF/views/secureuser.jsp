@@ -69,7 +69,7 @@
 							</a>
 
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="../j_spring_security_logout">
+							<a class="dropdown-item" href="/bridgembaas">
 								<i class="fa fa-power-off icon"></i> Logout
 							</a>
 						</div></li>

@@ -7,6 +7,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+/*
+ * GoogleConnection  
+ * 
+ * */
 public class GoogleConnection {
 	public static final String GG_APP_ID = "1063203149782-3c2mc0mgb6b1uu4ta9hj720c1ecoopdq.apps.googleusercontent.com";
 	public static final String GG_APP_SECRET = "glOO8FTt5F_9C8VFdvUxf3ON";
@@ -33,8 +37,8 @@ public class GoogleConnection {
 		System.out.println(code);
 		String GraphUrl = "";
 		try {
-			GraphUrl = "https://accounts.google.com/o/oauth2/token?" +"code=" + code+ "grant_type=authorization_code"+
-					"&client_id=" + GoogleConnection.GG_APP_ID + "&client_secret=" + GG_APP_SECRET + "&redirect_uri="
+			GraphUrl = "https://accounts.google.com/o/oauth2/token?" + "code=" + code + "grant_type=authorization_code"
+					+ "&client_id=" + GoogleConnection.GG_APP_ID + "&client_secret=" + GG_APP_SECRET + "&redirect_uri="
 					+ REDIRECT_URI;
 
 		} catch (Exception e) {
@@ -71,6 +75,7 @@ public class GoogleConnection {
 			}
 
 			accessToken = b.toString();
+			// Validating a AccessToken Got from the APIProvider
 			if (accessToken.startsWith("[")) {
 				throw new RuntimeException("ERROR: Access Token Invalid: " + accessToken);
 			}

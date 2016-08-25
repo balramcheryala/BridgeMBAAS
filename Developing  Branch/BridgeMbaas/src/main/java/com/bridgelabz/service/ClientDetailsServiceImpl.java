@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bridgelabz.dao.ClientDetailsDao;
 import com.bridgelabz.model.ClientDetailsModel;
 
-@Service("cds")
+@Service("detailservice")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class ClientDetailsServiceImpl implements ClientDetailsService {
 

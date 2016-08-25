@@ -1,9 +1,5 @@
 package com.bridgelabz.beans;
 
-import java.util.UUID;
-
-
-
 public class ClientDetailsBean {
 
 	/** The id. */
@@ -25,7 +21,7 @@ public class ClientDetailsBean {
 	private String signedin;
 
 	/** The useruid. */
-	private UUID useruid;
+	private String useruid;
 
 	/**
 	 * Gets the id.
@@ -146,18 +142,18 @@ public class ClientDetailsBean {
 	 *
 	 * @return the useruid
 	 */
-	public UUID getUseruid() {
+	public String getUseruid() {
 		return useruid;
 	}
 
 	/**
 	 * Sets the useruid.
 	 *
-	 * @param useruid
+	 * @param string
 	 *            the new useruid
 	 */
-	public void setUseruid(UUID useruid) {
-		this.useruid = useruid;
+	public void setUseruid(String string) {
+		this.useruid = string;
 	}
 
 }

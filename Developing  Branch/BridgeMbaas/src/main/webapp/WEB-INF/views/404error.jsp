@@ -90,7 +90,7 @@
 									class="fa fa-gear icon"></i> Settings
 								</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="login.html"> <i
+								<a class="dropdown-item" href="/bridgembaas"> <i
 									class="fa fa-power-off icon"></i> Logout
 								</a>
 							</div></li>
@@ -133,7 +133,7 @@
 									</div>
 								</div>
 							</div>
-							<br> <a class="btn btn-primary" href="userpage"><i
+							<br> <a class="btn btn-primary" href="/bridgembaas/"><i
 								class="fa fa-angle-left"></i> Back to Dashboard</a>
 						</div>
 					</div>

@@ -12,13 +12,13 @@ public class ClientCredentialsModelDaoImpl implements ClientCredentialsModelDao 
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public void addClientCredentials(ClientCredentialsModel ccm) {
-		sessionFactory.openSession().save(ccm);
+	public void addClientCredentials(ClientCredentialsModel clientcredentialmodel) {
+		sessionFactory.openSession().save(clientcredentialmodel);
 
 	}
 
-	public void updateClientCredentials(ClientCredentialsModel ccm) {
-		sessionFactory.openSession().update(ccm);
+	public void updateClientCredentials(ClientCredentialsModel clientcredentialmodel) {
+		sessionFactory.openSession().update(clientcredentialmodel);
 
 	}
 
@@ -33,10 +33,11 @@ public class ClientCredentialsModelDaoImpl implements ClientCredentialsModelDao 
 
 	}
 
-	public void deleteClientCredentials(ClientCredentialsModel ccm) {
-		sessionFactory.openSession().createQuery("DELETE FROM ClientCredentialsModel WHERE id = " + ccm.getId())
+	public void deleteClientCredentials(ClientCredentialsModel clientcredentialmodel) {
+		sessionFactory.openSession().createQuery("DELETE FROM ClientCredentialsModel WHERE id = " + clientcredentialmodel.getId())
 				.executeUpdate();
 
 	}
+
 
 }

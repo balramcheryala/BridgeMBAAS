@@ -86,7 +86,7 @@
 								class="fa fa-gear icon"></i> Settings
 							</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="login.html"> <i
+							<a class="dropdown-item" href="/bridgembaas"> <i
 								class="fa fa-power-off icon"></i> Logout
 							</a>
 						</div></li>
@@ -125,18 +125,18 @@
 				</h3>
 			</div>
 			<div class="auth-content">
-				<p class="text-xs-center">Add Client Id And Client Password</p>
+				<p class="text-xs-center">Add App Id And App Secret</p>
 
-				<form:form method="POST" action="credsave">
+				<form:form method="POST" action="credentialsave">
 
 					<div class="form-group">
-						<label for="email">Client Id</label>
+						<label for="email">App Id</label>
 						<form:input path="clientid" class="form-control underlined"
 							value="${crud.clientid}" />
 					</div>
 
 					<div class="form-group">
-						<label for="password">Client Password</label>
+						<label for="password">App Secret</label>
 						<form:input path="clientpassword" class="form-control underlined"
 							value="${crud.clientpassword}" />
 					</div>

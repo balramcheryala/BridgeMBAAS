@@ -48,48 +48,50 @@
 </head>
 
 <body>
-<center>
-	<br />
-	<br />
-	<div class="btn-group">
-		<a class='btn btn-danger disabled'><i class="fa fa-google-plus"
-			style="width: 16px; height: 20px"></i></a> <a class='btn btn-danger'
-			href='<%=google.getAuthUrl()%>' style="width: 12em;"> Sign in
-			with Google</a>
-	</div>
-	<br />
-	<br />
-	<div class="btn-group">
-		<a class='btn btn-primary disabled'><i class="fa fa-facebook"
-			style="width: 16px; height: 20px"></i></a> <a class='btn btn-primary '
-			href='<%=facebook.getAuthUrl()%>' style="width: 12em"> Sign in
-			with Facebook</a>
-	</div>
-	<br />
-	<br />
-	<div class="btn-group">
-		<a class='btn btn-default disabled'><i class="fa fa-github"
-			style="width: 16px; height: 20px"></i></a> <a class=' btn btn-default'
-			href='<%=github.getAuthUrl()%>' style="width: 12em"> Sign in with
-			GitHub</a>
-	</div>
-	<br />
-	<br />
-	<div class="btn-group">
-		<a class='btn btn-primary disabled'><i class="fa fa-linkedin"
-			style="width: 16px; height: 20px"></i></a> <a class='btn btn-primary '
-			href='<%=linkedin.getAuthUrl()%>' style="width: 12em"> Sign in
-			with LinkedIn</a>
-	</div>
-	<br />
-	<br />
-	<div class="btn-group">
-		<a class='btn btn-info'><i class="fa fa-twitter"
-			style="width: 16px; height: 20px"></i></a> <a class='btn btn-info '
-			href='/bridgembaas/signin' style="width: 12em"> Sign in with
-			Twitter</a>
-	</div>
-	<br />
-	<br /></center>
+	<center>
+		<br /> <br />
+		<div class="btn-group">
+
+			<a class='btn btn-info disabled'><i class="fa fa-gittip"
+				style="width: 20px; height: 20px"></i></a> <a class='btn btn-info'
+				href='#' style="width: 90em;"> Testing Purpose Only</a>
+		</div>
+		<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+		<div class="btn-group">
+			<a class='btn btn-danger disabled'><i class="fa fa-google-plus"
+				style="width: 16px; height: 20px"></i></a> <a class='btn btn-danger'
+				href='<%=google.getAuthUrl()%>' style="width: 12em;"> Sign in
+				with Google</a>
+		</div>
+		<br /> <br />
+		<div class="btn-group">
+			<a class='btn btn-primary disabled'><i class="fa fa-facebook"
+				style="width: 16px; height: 20px"></i></a> <a class='btn btn-primary '
+				href='<%=facebook.getAuthUrl()%>' style="width: 12em"> Sign in
+				with Facebook</a>
+		</div>
+		<br /> <br />
+		<div class="btn-group">
+			<a class='btn btn-default disabled'><i class="fa fa-github"
+				style="width: 16px; height: 20px"></i></a> <a class=' btn btn-default'
+				href='<%=github.getAuthUrl()%>' style="width: 12em"> Sign in
+				with GitHub</a>
+		</div>
+		<br /> <br />
+		<div class="btn-group">
+			<a class='btn btn-primary disabled'><i class="fa fa-linkedin"
+				style="width: 16px; height: 20px"></i></a> <a class='btn btn-primary '
+				href='<%=linkedin.getAuthUrl()%>' style="width: 12em"> Sign in
+				with LinkedIn</a>
+		</div>
+		<br /> <br />
+		<div class="btn-group">
+			<a class='btn btn-info'><i class="fa fa-twitter"
+				style="width: 16px; height: 20px"></i></a> <a class='btn btn-info '
+				href='/bridgembaas/signin' style="width: 12em"> Sign in with
+				Twitter</a>
+		</div>
+		<br /> <br />
+	</center>
 </body>
 </html>

@@ -105,7 +105,7 @@
 								class="fa fa-gear icon"></i> Settings
 							</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="logout"> <i
+							<a class="dropdown-item" href="/bridgembaas"> <i
 								class="fa fa-power-off icon"></i> Logout
 							</a>
 						</div></li>

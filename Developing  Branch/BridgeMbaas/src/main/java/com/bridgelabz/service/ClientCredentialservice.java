@@ -15,4 +15,5 @@ public interface ClientCredentialservice {
 	public ClientCredentialsModel getClientCredentials(int stdid);
 
 	public void deleteClientCredentials(ClientCredentialsModel crud);
+	
 }
