@@ -1,9 +1,11 @@
 package com.bridgelabz.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
 import com.bridgelabz.connection.FacebookConnection;
 import com.bridgelabz.connection.GitHubConnection;
 import com.bridgelabz.connection.GoogleConnection;
@@ -47,6 +50,12 @@ public class SocialController {
 	public static String TWITTER_CONSUMER_KEY = "M65Cy3KhTd08DOdHeQcLytzg1";
 	public static String TWITTER_CONSUMER_SECRET = "xupjwjeQ2UlhDrhs6Vh4deaNgdkBiCdOYDYA5iErYVT6vHGpfp";
 
+	File file = new File("/home/bridgelabz/Desktop/qwe.jpg");
+
+	/*
+	 * FaceBook Controller
+	 * 
+	 */
 	@RequestMapping(value = "/facebook", method = RequestMethod.GET)
 	public void facebook(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// getiing the autherazation code
@@ -84,6 +93,11 @@ public class SocialController {
 
 	}
 
+	/*
+	 * 
+	 * LinkedIn Controller
+	 * 
+	 */
 	@RequestMapping(value = "/linkedin", method = RequestMethod.GET)
 	public void LinkedIn(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// getiing the autherazation code
@@ -131,6 +145,10 @@ public class SocialController {
 
 	}
 
+	/*
+	 * Google Controller
+	 */
+
 	@RequestMapping(value = "/google", method = RequestMethod.GET)
 	public void google(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// getiing the autherazation code
@@ -166,6 +184,10 @@ public class SocialController {
 		out.println("<div>About :" + ProfileData.get("bio"));
 
 	}
+
+	/*
+	 * GitHub Controller
+	 */
 
 	@RequestMapping(value = "/github", method = RequestMethod.GET)
 	public void GitHub(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -213,8 +235,12 @@ public class SocialController {
 
 	}
 
+	/*
+	 * Twitter Controller
+	 */
 	@RequestMapping("/twitter")
-	public void twitter(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, TwitterException {
+	public void twitter(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, TwitterException {
 
 		// Get twitter object from session
 		Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
@@ -227,7 +253,7 @@ public class SocialController {
 		AccessToken accessToken;
 
 		try {
-			
+
 			accessToken = twitter.getOAuthAccessToken(requestToken, verifier);
 
 			System.out.println(accessToken);
@@ -235,49 +261,38 @@ public class SocialController {
 			ServletOutputStream out = response.getOutputStream();
 			out.println("<h1>BRIDGEMBAAS</h1>");
 			out.println("<h2>Twitter Application Main Menu</h2>");
-			out.println("<h2>YourUserId:" + accessToken.getUserId());
+
 			out.println("<h2>Your ScreenName:" + accessToken.getScreenName());
 			out.println("<h2>Your Token:" + accessToken.getToken());
 			out.println("<h2>Your TokenSecret:" + accessToken.getTokenSecret());
-			//Instantiate and initialize a new twitter status update
-	        StatusUpdate statusUpdate = new StatusUpdate(
-	                //your tweet or status message
-	                "Balram" +
-	                " Test Posting");
-	        //attach any media, if you want to
-	        statusUpdate.setMedia(
-	                //title of media
-	                "http://h1b-work-visa-usa.blogspot.com"
-	                , new URL("http://bridgelabz.com/images/slide-bg-3.jpg?imgmax=800").openStream());
 
-	        //tweet or update status
-	        Status status = twitter.updateStatus(statusUpdate);
+			// Instantiate and initialize a new twitter status update
+			StatusUpdate su = new StatusUpdate(
+					// your tweet or status message
+					"Good After Noon ,, Just Now I had my Lunch itself....");
 
-	        //response from twitter server
-	        System.out.println("status.toString() = " + status.toString());
-	        System.out.println("status.getInReplyToScreenName() = " + status.getInReplyToScreenName());
-	        System.out.println("status.getSource() = " + status.getSource());
-	        System.out.println("status.getText() = " + status.getText());
-	        System.out.println("status.getContributors() = " + Arrays.toString(status.getContributors()));
-	        System.out.println("status.getCreatedAt() = " + status.getCreatedAt());
-	        System.out.println("status.getCurrentUserRetweetId() = " + status.getCurrentUserRetweetId());
-	        System.out.println("status.getGeoLocation() = " + status.getGeoLocation());
-	        System.out.println("status.getId() = " + status.getId());
-	        System.out.println("status.getInReplyToStatusId() = " + status.getInReplyToStatusId());
-	        System.out.println("status.getInReplyToUserId() = " + status.getInReplyToUserId());
-	        System.out.println("status.getPlace() = " + status.getPlace());
-	        System.out.println("status.getRetweetCount() = " + status.getRetweetCount());
-	        System.out.println("status.getRetweetedStatus() = " + status.getRetweetedStatus());
-	        System.out.println("status.getUser() = " + status.getUser());
-	        System.out.println("status.getAccessLevel() = " + status.getAccessLevel());
-	        System.out.println("status.getHashtagEntities() = " + Arrays.toString(status.getHashtagEntities()));
-	        System.out.println("status.getMediaEntities() = " + Arrays.toString(status.getMediaEntities()));
+			/*
+			 * // attach any media, if you want to su.setMedia( // title of
+			 * media "Titile" // url any from website media urls , new
+			 * URL("http://bridgelabz.com/images/slide-bg-3.jpg?imgmax=800").
+			 * openStream());
+			 */
+
+			// Upload Media File
+			su.setMedia(file);
+			// tweet or update status
+			Status status = twitter.updateStatus(su);
+			out.println("" + status.getUser());
 		} catch (TwitterException e) {
 
 			e.printStackTrace();
 		}
 	}
 
+	/*
+	 * 
+	 * Twitter Sign In Controller
+	 */
 	@RequestMapping("/signin")
 	public void twitterSignin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
