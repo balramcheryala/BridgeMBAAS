@@ -9,12 +9,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
+import facebook4j.Facebook;
+
 /*
  * FacebookConnection  
  * 
  * */
 public class FacebookConnection {
-
+	
 	public static final String FB_APP_ID = "872311806235774";
 	public static final String FB_APP_SECRET = "f9b7d6e1e4d13b4cc2fcee4ea342fabf";
 	public static final String REDIRECT_URI = "http://localhost:8081/bridgembaas/facebook";

@@ -2,8 +2,6 @@ package com.bridgelabz.controllers;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Arrays;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -16,9 +14,12 @@ import org.hibernate.SessionFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.bridgelabz.connection.FacebookConnection;
@@ -30,6 +31,9 @@ import com.bridgelabz.graph.GitHubGraph;
 import com.bridgelabz.graph.GoogleGraph;
 import com.bridgelabz.graph.LinkedInGraph;
 
+import facebook4j.Facebook;
+import facebook4j.FacebookException;
+import facebook4j.FacebookFactory;
 import twitter4j.Status;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
@@ -47,17 +51,20 @@ public class SocialController {
 	public SessionFactory sessionfactory;
 	private String code = "";
 	JSONObject jsonObj;
+	Facebook facebook = new FacebookFactory().getInstance();
 	public static String TWITTER_CONSUMER_KEY = "M65Cy3KhTd08DOdHeQcLytzg1";
 	public static String TWITTER_CONSUMER_SECRET = "xupjwjeQ2UlhDrhs6Vh4deaNgdkBiCdOYDYA5iErYVT6vHGpfp";
 
-	File file = new File("/home/bridgelabz/Desktop/qwe.jpg");
+	File file1 = new File("/home/bridgelabz/Desktop/back.jpg");
+	Twitter twitter;
 
 	/*
 	 * FaceBook Controller
 	 * 
 	 */
 	@RequestMapping(value = "/facebook", method = RequestMethod.GET)
-	public void facebook(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public void facebook(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException, FacebookException {
 		// getiing the autherazation code
 		code = req.getParameter("code");
 		System.out.println("Authorization Code : " + code);
@@ -235,6 +242,29 @@ public class SocialController {
 
 	}
 
+	// Request Mapping For post
+	@RequestMapping(value = "/post",method = RequestMethod.POST)
+	public ModelAndView playersList(@RequestParam(value="tweet", required=true) String post) throws TwitterException {
+		System.out.println(post);
+		StatusUpdate status = new StatusUpdate(post);
+
+		twitter.updateStatus(status);
+
+		return new ModelAndView("suc");
+	}
+
+	// Method For Upload Pic For Twitter
+
+	public void uploadPic(File file, String message) throws Exception {
+		try {
+			StatusUpdate status = new StatusUpdate(message);
+			status.setMedia(file);
+			twitter.updateStatus(status);
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+	}
+
 	/*
 	 * Twitter Controller
 	 */
@@ -243,7 +273,7 @@ public class SocialController {
 			throws ServletException, IOException, TwitterException {
 
 		// Get twitter object from session
-		Twitter twitter = (Twitter) request.getSession().getAttribute("twitter");
+		twitter = (Twitter) request.getSession().getAttribute("twitter");
 
 		// Get twitter request token object from session
 		RequestToken requestToken = (RequestToken) request.getSession().getAttribute("requestToken");
@@ -266,23 +296,23 @@ public class SocialController {
 			out.println("<h2>Your Token:" + accessToken.getToken());
 			out.println("<h2>Your TokenSecret:" + accessToken.getTokenSecret());
 
-			// Instantiate and initialize a new twitter status update
-			StatusUpdate su = new StatusUpdate(
-					// your tweet or status message
-					"Good After Noon ,, Just Now I had my Lunch itself....");
-
 			/*
+			 * // Instantiate and initialize a new twitter status update
+			 * StatusUpdate su = new StatusUpdate(
+			 * 
+			 * // your tweet or status message "Hi BridegeLabz");
+			 * 
+			 * 
 			 * // attach any media, if you want to su.setMedia( // title of
 			 * media "Titile" // url any from website media urls , new
 			 * URL("http://bridgelabz.com/images/slide-bg-3.jpg?imgmax=800").
 			 * openStream());
+			 * 
+			 * 
+			 * // Uploading Media File su.setMedia(file1); // tweet or update
+			 * status Status status = twitter.updateStatus(su); out.println("" +
+			 * status.getUser()); System.out.println("Successfully uploaded");
 			 */
-
-			// Upload Media File
-			su.setMedia(file);
-			// tweet or update status
-			Status status = twitter.updateStatus(su);
-			out.println("" + status.getUser());
 		} catch (TwitterException e) {
 
 			e.printStackTrace();

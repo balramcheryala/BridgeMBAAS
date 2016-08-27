@@ -54,6 +54,14 @@ public class AuthController {
 		return model;
 	}
 
+	// twitterpost
+	@RequestMapping(value = { "/twitterpost" }, method = RequestMethod.GET)
+	public ModelAndView Post() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("uploadform");
+		return model;
+	}
+
 	// Sign in By controller
 	@RequestMapping(value = { "/signinby" }, method = RequestMethod.GET)
 	public ModelAndView signInBy() {
