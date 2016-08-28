@@ -13,6 +13,13 @@ import com.bridgelabz.beans.ClientDetailsBean;
 import com.bridgelabz.model.ClientCredentialsModel;
 import com.bridgelabz.model.ClientDetailsModel;
 
+
+/*class Prepairation
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
+ */
+
+
 public class Prepairation {
 
 	// Importing Session

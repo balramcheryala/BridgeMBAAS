@@ -4,6 +4,13 @@ import java.util.List;
 
 import com.bridgelabz.model.ClientCredentialsModel;
 
+
+/*interface ClientCredentialsModelDao.
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
+ */
+
+
 public interface ClientCredentialsModelDao {
 
 	public void addClientCredentials(ClientCredentialsModel clientcredentialmodel);

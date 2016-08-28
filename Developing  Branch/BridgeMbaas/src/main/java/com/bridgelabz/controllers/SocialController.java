@@ -40,6 +40,13 @@ import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 import twitter4j.conf.ConfigurationBuilder;
 
+
+/*Class ClientDetailsBean.
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
+ */
+
+
 @RestController
 @EnableWebMvc
 public class SocialController {

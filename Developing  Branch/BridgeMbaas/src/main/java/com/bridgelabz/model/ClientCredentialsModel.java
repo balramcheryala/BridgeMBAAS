@@ -10,6 +10,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ClientCredentialsModel")
+
+/*class ClientCredentialsModel
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
+ */
+
+
 public class ClientCredentialsModel {
 
 	/** The id. */

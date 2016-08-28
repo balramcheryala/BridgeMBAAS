@@ -8,6 +8,13 @@ import org.springframework.stereotype.Repository;
 
 import com.bridgelabz.model.ClientDetailsModel;
 
+
+/*implements ClientDetailsDao.
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
+ */
+
+
 @Repository("ClientDetailsModel")
 public class ClientDetailsDaoImpl implements ClientDetailsDao {
 

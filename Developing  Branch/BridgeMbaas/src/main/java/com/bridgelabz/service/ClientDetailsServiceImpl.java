@@ -10,6 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bridgelabz.dao.ClientDetailsDao;
 import com.bridgelabz.model.ClientDetailsModel;
 
+/*class implements ClientDetailsService
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
+ */
+
 @Service("detailservice")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class ClientDetailsServiceImpl implements ClientDetailsService {

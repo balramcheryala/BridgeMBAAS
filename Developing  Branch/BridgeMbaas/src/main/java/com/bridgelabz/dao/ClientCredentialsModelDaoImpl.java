@@ -7,6 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.bridgelabz.model.ClientCredentialsModel;
 
+
+/*implements ClientCredentialsModelDao.
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
+ */
+
+
 @Repository("ClientCredentialsModel")
 public class ClientCredentialsModelDaoImpl implements ClientCredentialsModelDao {
 	@Autowired

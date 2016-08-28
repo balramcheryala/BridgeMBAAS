@@ -6,6 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+/*class GoogleCredentials
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
+ */
+
 @Entity
 @Table(name = "GoogleCredentials")
 public class GoogleCredentials {

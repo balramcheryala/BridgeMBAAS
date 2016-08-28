@@ -1,5 +1,12 @@
 package com.bridgelabz.beans;
 
+
+/*Class ClientDetailsBean.
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
+ */
+
+
 public class ClientDetailsBean {
 
 	/** The id. */

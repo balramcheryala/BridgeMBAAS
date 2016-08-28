@@ -4,6 +4,13 @@ import java.util.List;
 
 import com.bridgelabz.model.ClientDetailsModel;
 
+
+/*interface ClientDetailsDao.
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
+ */
+
+
 public interface ClientDetailsDao {
 
 	public void addClientDetails(ClientDetailsModel clientdetailmodel);

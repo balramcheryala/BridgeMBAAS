@@ -1,8 +1,11 @@
 package com.bridgelabz.beans;
 
-/**
- * The Class CredentialsBean.
+/*Class CredentialsBean.
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
  */
+
+
 public class ClientCredentialsBean {
 
 	/** The id. */

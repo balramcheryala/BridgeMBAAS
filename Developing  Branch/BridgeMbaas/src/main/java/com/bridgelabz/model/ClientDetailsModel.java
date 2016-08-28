@@ -9,9 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * The Class Crud.
+/*class ClientDetailsModel
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
  */
+
+
 @Entity
 @Table(name = "ClientDetailsModel")
 public class ClientDetailsModel implements Serializable {

@@ -17,10 +17,14 @@ import com.bridgelabz.model.ClientDetailsModel;
 import com.bridgelabz.service.ClientCredentialservice;
 import com.bridgelabz.service.ClientDetailsService;
 
-/**
- * @author bridgelabz
- *
+
+
+/*Class AuthController.
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
  */
+
+
 // AuthController
 @RestController
 public class AuthController {

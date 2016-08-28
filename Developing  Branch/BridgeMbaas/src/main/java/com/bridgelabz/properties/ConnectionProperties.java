@@ -1,9 +1,12 @@
 package com.bridgelabz.properties;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/*class ConnectionProperties
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
+ */
 public class ConnectionProperties {
 
 	@Autowired
@@ -26,6 +29,5 @@ public class ConnectionProperties {
 	public String LK_APP_ID = "81ofobqq5caolc";
 	public String LK_APP_SECRET = "V1MefhE1dUOmUyYg";
 	public String LK_REDIRECT_URI = "http://localhost:8081/bridgembaas/linkedin";
-	
 
 }

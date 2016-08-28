@@ -10,6 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bridgelabz.dao.ClientCredentialsModelDao;
 import com.bridgelabz.model.ClientCredentialsModel;
 
+/*class implements ClientCredentialservice
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
+ */
+
 @Service("credentialservice")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class CredentialsServiceImpl implements ClientCredentialservice {

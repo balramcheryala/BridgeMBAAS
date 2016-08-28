@@ -6,6 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+/*class TwitterDetails
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
+ */
 @Entity
 @Table(name = "TwitterDetails")
 public class TwitterDetails {
