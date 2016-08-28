@@ -41,11 +41,11 @@
 			<list>
 				<value>com.bridgelabz.model.ClientCredentialsModel</value>
 				<value>com.bridgelabz.model.ClientDetailsModel</value>
-				<value>com.bridgelabz.model.FacebookCredentials</value>
-				<value>com.bridgelabz.model.GitHubCredentials</value>
+				<value>com.bridgelabz.model.FacebookDetails</value>
 				<value>com.bridgelabz.model.GoogleCredentials</value>
-				<value>com.bridgelabz.model.LinkedInCredentials</value>
-				<value>com.bridgelabz.model.TwitterCredentials</value>
+				<value>com.bridgelabz.model.GitHubDetails</value>
+				<value>com.bridgelabz.model.LinkedInDetails</value>
+				<value>com.bridgelabz.model.TwitterDetails</value>
 			</list>
 		</property>
 	</bean>

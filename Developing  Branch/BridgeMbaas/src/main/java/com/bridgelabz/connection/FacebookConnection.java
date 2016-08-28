@@ -9,26 +9,26 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-import facebook4j.Facebook;
+import com.bridgelabz.properties.ConnectionProperties;
 
-/*
- * FacebookConnection  
- * 
- * */
+
+/*Connection name: FacebookConnection
+ *created: Aug 18, 2016 11:33AM
+ *Created By: Balram
+ */
+
+
 public class FacebookConnection {
 	
-	public static final String FB_APP_ID = "872311806235774";
-	public static final String FB_APP_SECRET = "f9b7d6e1e4d13b4cc2fcee4ea342fabf";
-	public static final String REDIRECT_URI = "http://localhost:8081/bridgembaas/facebook";
-
+	ConnectionProperties CP = new ConnectionProperties();
 	static String accessToken = "";
 
 	// Invoking a authentication url
 	public String getAuthUrl() {
 		String fbLoginUrl = "";
 		try {
-			fbLoginUrl = "http://www.facebook.com/dialog/oauth?" + "client_id=" + FacebookConnection.FB_APP_ID
-					+ "&redirect_uri=" + URLEncoder.encode(FacebookConnection.REDIRECT_URI, "UTF-8") + "&scope=email";
+			fbLoginUrl = "http://www.facebook.com/dialog/oauth?" + "client_id=" + CP.FB_APP_ID + "&redirect_uri="
+					+ URLEncoder.encode(CP.FB_REDIRECT_URI, "UTF-8") + "&scope=email";
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -39,9 +39,9 @@ public class FacebookConnection {
 	public String getGraphUrl(String code) {
 		String fbGraphUrl = "";
 		try {
-			fbGraphUrl = "https://graph.facebook.com/oauth/access_token?" + "client_id=" + FacebookConnection.FB_APP_ID
-					+ "&redirect_uri=" + URLEncoder.encode(FacebookConnection.REDIRECT_URI, "UTF-8") + "&client_secret="
-					+ FB_APP_SECRET + "&code=" + code;
+			fbGraphUrl = "https://graph.facebook.com/oauth/access_token?" + "client_id=" + CP.FB_APP_ID
+					+ "&redirect_uri=" + URLEncoder.encode(CP.FB_REDIRECT_URI, "UTF-8") + "&client_secret="
+					+ CP.FB_APP_SECRET + "&code=" + code;
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

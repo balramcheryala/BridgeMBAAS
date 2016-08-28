@@ -7,14 +7,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-/*
- * Github Connection 
- * 
- * */
+import com.bridgelabz.properties.ConnectionProperties;
+
+/*Connection name: GitHubConnection
+ *created: Aug 18, 2016 10:33AM
+ *Created By: Balram
+ */
+
 public class GitHubConnection {
-	public static final String GH_APP_ID = "5f6355f6c885df210f9b";
-	public static final String GH_APP_SECRET = "72454ff52dd90e4648ce23aa1748bbb333ff9eac";
-	public static final String REDIRECT_URI = "http://localhost:8081/bridgembaas/github";
+	ConnectionProperties CP = new ConnectionProperties();
 
 	static String accessToken = "";
 
@@ -23,8 +24,8 @@ public class GitHubConnection {
 		String LoginUrl = "";
 		try {
 
-			LoginUrl = "https://github.com/login/oauth/authorize?" + "client_id=" + GitHubConnection.GH_APP_ID
-					+ "&redirect_uri=" + REDIRECT_URI + "&scope=user";
+			LoginUrl = "https://github.com/login/oauth/authorize?" + "client_id=" + CP.GH_APP_ID + "&redirect_uri="
+					+ CP.GH_REDIRECT_URI + "&scope=user";
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -39,8 +40,8 @@ public class GitHubConnection {
 		String GraphUrl = "";
 		try {
 
-			GraphUrl = "https://github.com/login/oauth/access_token?client_id=" + GitHubConnection.GH_APP_ID
-					+ "&redirect_uri=" + REDIRECT_URI + "&client_secret=" + GH_APP_SECRET + "&code=" + code;
+			GraphUrl = "https://github.com/login/oauth/access_token?client_id=" + CP.GH_APP_ID + "&redirect_uri="
+					+ CP.GH_REDIRECT_URI + "&client_secret=" + CP.GH_APP_SECRET + "&code=" + code;
 
 		} catch (Exception e) {
 			e.printStackTrace();

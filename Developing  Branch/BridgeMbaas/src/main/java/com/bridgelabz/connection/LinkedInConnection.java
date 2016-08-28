@@ -12,26 +12,25 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-/*
- * LinkedInConnection 
- * 
- * */
+import com.bridgelabz.properties.ConnectionProperties;
+
+/*Connection name: LinkedInConnection
+ *created: Aug 18, 2016 09:33AM
+ *Created By: Balram
+ */
+
 public class LinkedInConnection {
 
-	public static final String APP_ID = "81ofobqq5caolc";
-
-	public static final String APP_SECRET = "V1MefhE1dUOmUyYg";
-
-	public static final String REDIRECT_URI = "http://localhost:8081/bridgembaas/linkedin";
-
+	ConnectionProperties CP = new ConnectionProperties();
 	static String accessToken = "";
 
+	// Invoking a authentication url
 	public String getAuthUrl() {
 		String LoginUrl = "";
 		try {
+
 			LoginUrl = "https://www.linkedin.com/oauth/v2/authorization?" + "response_type=code&client_id="
-					+ LinkedInConnection.APP_ID + "&redirect_uri="
-					+ URLEncoder.encode(LinkedInConnection.REDIRECT_URI, "UTF-8")
+					+ CP.LK_APP_ID + "&redirect_uri=" + URLEncoder.encode(CP.LK_REDIRECT_URI, "UTF-8")
 					+ "&state=DCEe45A53sdfKef424FWf&scope=r_basicprofile";
 
 		} catch (UnsupportedEncodingException e) {
@@ -40,12 +39,15 @@ public class LinkedInConnection {
 		return LoginUrl;
 	}
 
+	// Sending Code With Our Client_id & client_SecretCode To Graph_url For
+	// Token
+	// creating a connection to grapghurl
 	public String getGraphUrl(String code) {
 		String GraphUrl = "";
 		try {
 			GraphUrl = "https://www.linkedin.com/oauth/v2/accessToken?" + "grant_type=authorization_code&code=" + code
-					+ "&redirect_uri=" + URLEncoder.encode(LinkedInConnection.REDIRECT_URI, "UTF-8") + "&client_id="
-					+ LinkedInConnection.APP_ID + "&client_secret=" + APP_SECRET;
+					+ "&redirect_uri=" + URLEncoder.encode(CP.LK_REDIRECT_URI, "UTF-8") + "&client_id=" + CP.LK_APP_ID
+					+ "&client_secret=" + CP.LK_APP_SECRET;
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -53,6 +55,8 @@ public class LinkedInConnection {
 		return GraphUrl;
 	}
 
+	// Exchanging Code and Generating Access Token Here
+	// getting accesstoken
 	public String getAccessToken(String code) {
 		if ("".equals(accessToken)) {
 			URL GraphURL;
@@ -70,6 +74,8 @@ public class LinkedInConnection {
 				BufferedReader in;
 				in = new BufferedReader(new InputStreamReader(Connection.getInputStream()));
 				String inputLine;
+
+				// reading a accesstoken from jsp page
 				b = new StringBuffer();
 				while ((inputLine = in.readLine()) != null)
 					b.append(inputLine + "\n");
@@ -80,6 +86,7 @@ public class LinkedInConnection {
 			}
 
 			accessToken = b.toString();
+			// Validating a AccessToken Got from the APiProvider
 			if (accessToken.startsWith("[")) {
 				throw new RuntimeException("ERROR: Access Token Invalid: " + accessToken);
 			}

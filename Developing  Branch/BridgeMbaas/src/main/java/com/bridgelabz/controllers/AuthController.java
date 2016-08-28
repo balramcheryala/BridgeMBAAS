@@ -36,6 +36,14 @@ public class AuthController {
 	// Class Objects
 	Prepairation preparation = new Prepairation();
 
+	// twitterpost
+	@RequestMapping(value = { "/twitterpost" }, method = RequestMethod.GET)
+	public ModelAndView Post() {
+		ModelAndView model = new ModelAndView();
+		model.setViewName("uploadform");
+		return model;
+	}
+
 	// Dashboard controller
 	@RequestMapping(value = { "/dashboard" }, method = RequestMethod.GET)
 	public ModelAndView dashboard() {
@@ -51,14 +59,6 @@ public class AuthController {
 	public ModelAndView testdemo() {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("testdemo");
-		return model;
-	}
-
-	// twitterpost
-	@RequestMapping(value = { "/twitterpost" }, method = RequestMethod.GET)
-	public ModelAndView Post() {
-		ModelAndView model = new ModelAndView();
-		model.setViewName("uploadform");
 		return model;
 	}
 

@@ -7,22 +7,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-/*
- * GoogleConnection  
- * 
- * */
-public class GoogleConnection {
-	public static final String GG_APP_ID = "1063203149782-3c2mc0mgb6b1uu4ta9hj720c1ecoopdq.apps.googleusercontent.com";
-	public static final String GG_APP_SECRET = "glOO8FTt5F_9C8VFdvUxf3ON";
-	public static final String REDIRECT_URI = "http://localhost:8081/bridgembaas/userpage";
+import com.bridgelabz.properties.ConnectionProperties;
 
+/*Connection name: GoogleConnection
+ *created: Aug 18, 2016 12:33PM
+ *Created By: Balram
+ */
+
+
+public class GoogleConnection {
+	ConnectionProperties CP = new ConnectionProperties();
 	static String accessToken = "";
 
 	public String getAuthUrl() {
 		String LoginUrl = "";
 		try {
 			LoginUrl = "https://accounts.google.com/o/oauth2/auth?" + "&scope=email%20profile" + "&redirect_uri="
-					+ REDIRECT_URI + "&response_type=code&client_id=" + GoogleConnection.GG_APP_ID
+					+ CP.GG_REDIRECT_URI + "&response_type=code&client_id=" + CP.GG_APP_ID
 					+ "&nonce=DgkRrHXmyu3KLd0KDdfq";
 
 		} catch (Exception e) {
@@ -38,8 +39,8 @@ public class GoogleConnection {
 		String GraphUrl = "";
 		try {
 			GraphUrl = "https://accounts.google.com/o/oauth2/token?" + "code=" + code + "grant_type=authorization_code"
-					+ "&client_id=" + GoogleConnection.GG_APP_ID + "&client_secret=" + GG_APP_SECRET + "&redirect_uri="
-					+ REDIRECT_URI;
+					+ "&client_id=" + CP.GG_APP_ID + "&client_secret=" + CP.GG_APP_SECRET + "&redirect_uri="
+					+ CP.GG_REDIRECT_URI;
 
 		} catch (Exception e) {
 			e.printStackTrace();
