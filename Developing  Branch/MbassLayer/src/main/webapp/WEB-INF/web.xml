@@ -1,30 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-         version="3.1">
-         <welcome-file-list>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
+	</welcome-file-list>
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
+	<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/</url-pattern>
-		<url-pattern>/dashboard</url-pattern>
-   <url-pattern>/fileUploadForm</url-pattern>
-   <url-pattern>/insert</url-pattern>
-    <url-pattern>/select</url-pattern>
-   <url-pattern>/jsonData</url-pattern>
-  <url-pattern>/selectIdPage</url-pattern>
-  <url-pattern>/idSelect</url-pattern>
-  <url-pattern>/specific</url-pattern>
-  <url-pattern>/columnRowId</url-pattern>
-  <url-pattern>/delete</url-pattern>
-   <url-pattern>*.htm</url-pattern>
+	<url-pattern>/twitterpost</url-pattern>
+	<url-pattern>/dashBoard</url-pattern>
+	<url-pattern>/testdemo</url-pattern>
+	<url-pattern>/signinby</url-pattern>
+	<url-pattern>/userpage</url-pattern>
+	<url-pattern>/secureuser</url-pattern>
+	<url-pattern>/save</url-pattern>
+	<url-pattern>/project</url-pattern>
+	<url-pattern>/credentialsave</url-pattern>
+	<url-pattern>/newuser</url-pattern>
+	<url-pattern>/credentialadd</url-pattern>
+	<url-pattern>/add</url-pattern>
+	<url-pattern>/update</url-pattern>
+	<url-pattern>/delete</url-pattern>
+	<url-pattern>/edit</url-pattern>
+	<url-pattern>/facebook</url-pattern>
+	<url-pattern>/linkedin</url-pattern>
+	<url-pattern>/google</url-pattern>
+	<url-pattern>/github</url-pattern>
+	<url-pattern>/twitter</url-pattern>
+	<url-pattern>/post</url-pattern>
+	<url-pattern>/signin</url-pattern>
+	<url-pattern>/dashboard</url-pattern>
+	<url-pattern>/fileUploadForm</url-pattern>
+	<url-pattern>/insert</url-pattern>
+	<url-pattern>/select</url-pattern>
+	<url-pattern>/jsonData</url-pattern>
+	<url-pattern>*.htm</url-pattern>
+	<url-pattern>/overview</url-pattern>
+	<url-pattern>/addmbaas</url-pattern>
+	<url-pattern>/userinfo</url-pattern>
+	<url-pattern>/mbaasprojects</url-pattern>
 	</servlet-mapping>
 	<listener>
         <listener-class>
@@ -35,6 +54,7 @@
 	<context-param>
         <param-name>contextConfigLocation</param-name>
      <param-value>
+     
     	classpath:root-context.xml
      <!-- classpath:root-context.xml -->
      </param-value> 

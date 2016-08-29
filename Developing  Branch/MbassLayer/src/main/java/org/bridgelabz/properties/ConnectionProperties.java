@@ -24,7 +24,7 @@ public class ConnectionProperties {
 
 	public String GG_APP_ID = "1063203149782-3c2mc0mgb6b1uu4ta9hj720c1ecoopdq.apps.googleusercontent.com";
 	public String GG_APP_SECRET = "glOO8FTt5F_9C8VFdvUxf3ON";
-	public String GG_REDIRECT_URI = "http://localhost:8081/bridgembaas/userpage";
+	public String GG_REDIRECT_URI = "http://localhost:8086/MbassLayer/mbaasprojects";
 
 	public String LK_APP_ID = "81ofobqq5caolc";
 	public String LK_APP_SECRET = "V1MefhE1dUOmUyYg";

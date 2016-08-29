@@ -3,12 +3,10 @@ package org.bridgelabz.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.bridgelabz.connection.FacebookConnection;
 import org.bridgelabz.connection.GitHubConnection;
 import org.bridgelabz.connection.GoogleConnection;
@@ -32,8 +30,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -47,9 +43,7 @@ import twitter4j.conf.ConfigurationBuilder;
  *Created By: Balram
  */
 
-
-@Controller
-@EnableWebMvc
+@Controller("social")
 public class SocialController {
 	Session session;
 	ConnectionProperties CP = new ConnectionProperties();

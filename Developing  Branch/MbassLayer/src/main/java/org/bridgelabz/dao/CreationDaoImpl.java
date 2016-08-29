@@ -101,7 +101,7 @@ public class CreationDaoImpl implements CreationDao
 		}
 		 PrintWriter out=null;
 		try {
-			file="/home/bridgelabz/Desktop/"+k+".txt";
+			file="/home/bridgeit/Desktop/"+k+".txt";
 			out = new PrintWriter(file);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -229,9 +229,8 @@ public class CreationDaoImpl implements CreationDao
                 exm.setClient(clientlist);
                 Gson gson=new GsonBuilder().serializeNulls().setPrettyPrinting().create();
                 String jsonArray=gson.toJson(exm,Example.class);
-                /*ObjectMapper mapper = new ObjectMapper();
-                jsonArray= mapper.writerWithDefaultPrettyPrinter().writeValueAsString(arrlist);*/
-                file="/home/bridgelabz/Desktop/"+"bridgeembaas"+".txt";
+               
+                file="/home/bridgeit/Desktop/"+"bridgeembaas"+".txt";
 				out = new PrintWriter(file);
 	            
 		        out.println(jsonArray);

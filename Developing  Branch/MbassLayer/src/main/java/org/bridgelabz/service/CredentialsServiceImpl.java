@@ -2,7 +2,7 @@ package org.bridgelabz.service;
 
 import java.util.List;
 
-import org.bridgelabz.dao.ClientCredentialsModelDao;
+import org.bridgelabz.dao.ClientCredentialsDao;
 import org.bridgelabz.model.ClientCredentialsModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
  *Created By: Balram
  */
 
-@Service("credentialservice")
+
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class CredentialsServiceImpl implements ClientCredentialservice {
 	@Autowired
-	private ClientCredentialsModelDao cruddao;
+	private ClientCredentialsDao cruddao;
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void addClientCredentials(ClientCredentialsModel crud) {

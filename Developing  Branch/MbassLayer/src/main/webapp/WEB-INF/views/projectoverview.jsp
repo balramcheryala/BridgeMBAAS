@@ -88,7 +88,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a href="userinfo">
 							<span><i><img alt="" src="resources/images/account.png" width="25px" height=25px style="margin-top:20%;"></i></span>
 							<span>Auth</span>
 						</a>

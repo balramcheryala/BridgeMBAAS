@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  *Created By: Balram
  */
 
-@Repository("ClientDetailsModel")
+
 public class ClientDetailsDaoImpl implements ClientDetailsDao {
 
 	/** The session factory. */

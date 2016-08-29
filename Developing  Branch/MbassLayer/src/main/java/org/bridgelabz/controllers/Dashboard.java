@@ -33,6 +33,8 @@ public class Dashboard {
 	SessionFactory sessionFactory;
 	@Autowired
 	ProjectService projectService;
+	@Autowired
+	UploadController controller;
 	private static final String CHAR_LIST = "abcdefghijklmnopqrstuvwxyz1234567890";
 	private static final int RANDOM_STRING_LENGTH = 4;
 
@@ -49,11 +51,13 @@ public class Dashboard {
 	public ModelAndView displaydashboard(@RequestParam(value = "projectname", required = true) String pName,
 			Projectname projectname) {
 		String s = k;
+		controller.getDBSchema(s);
 		globalname = pName;
 		System.out.println(s);
 		System.out.println("126666");
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("projectname", pName);
+		controller.getProjectName(pName);
 		model.put("schema", s);
 		return new ModelAndView("projectoverview", model);
 	}
@@ -136,7 +140,7 @@ public class Dashboard {
 		UUID uidprojectnumber = UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d");
 		project.setProjectNumber(uidprojectnumber.randomUUID().toString());
 		k = project.getProjectName() + generateRandomString();
-		project.setProjectURL("http://localhost:8086 F/MbassLayer/" + k);
+		project.setProjectURL("http://localhost:8086 F/JsonUpload/" + k);
 		project.setSchemaName(k);
 		try {
 			Class.forName(jdbcDriver);

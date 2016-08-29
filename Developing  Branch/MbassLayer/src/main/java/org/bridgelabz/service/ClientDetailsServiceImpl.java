@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  *Created By: Balram
  */
 
-@Service("detailservice")
+
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 public class ClientDetailsServiceImpl implements ClientDetails {
 

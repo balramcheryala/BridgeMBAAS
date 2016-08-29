@@ -32,7 +32,7 @@ public class DBFileDownloadServlet extends HttpServlet {
     // database connection settings
     
     private String dbUser = "root";
-    private String dbPass = "ammy";
+    private String dbPass = "root";
      
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {

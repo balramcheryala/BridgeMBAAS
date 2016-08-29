@@ -1,8 +1,6 @@
 package org.bridgelabz.dao;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -14,15 +12,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.BindingResult;
-
-import com.mysql.jdbc.ResultSetMetaData;
-
 @Repository("dao")
 public class TableDaoImpl implements TableDao {
 	/** The m table name. */
@@ -32,18 +26,27 @@ public class TableDaoImpl implements TableDao {
 	/** The json objects keys. */
 	public Map<String, String> pair = new HashMap<String, String>();
 	/** The db connection. */
+	private  final String jdbcDriver = "com.mysql.jdbc.Driver";
+	private  String connectionURL =null;
 	static Connection dbConnection = null;
-
+	static final String USER = "root";
+	static final String PASS = "root";
 	/** The pstmt. */
 	PreparedStatement pstmt = null;
-
+	public String getDBSchema(String DB_Schema_Name)
+	{
+		System.out.println("schema name: "+DB_Schema_Name);
+		connectionURL="jdbc:mysql://localhost:3306/"+DB_Schema_Name;
+		System.out.println("url :"+connectionURL);
+		return connectionURL; 
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see com.bridgelabz.dao.TableDao#getFile(java.lang.String,
 	 * org.springframework.validation.BindingResult)
 	 */
-	@SuppressWarnings({ "unused", "rawtypes" })
+	@SuppressWarnings({ "unchecked", "unused", "rawtypes" })
 	public String getFile(String uploadedValidFile, BindingResult result) throws IOException, Exception {
 		JSONObject jsonObject = new JSONObject(uploadedValidFile);
 		// loop to get the dynamic key
@@ -76,7 +79,9 @@ public class TableDaoImpl implements TableDao {
 			if (table.next()) {
 				// Table exists
 				System.out.println("table name already exist in Database..!");
-			} else {
+			} 
+			else
+			{
 				// Table does not exist
 				// create SQL query to create new table Team
 				String query = null;
@@ -104,8 +109,9 @@ public class TableDaoImpl implements TableDao {
 				} else {
 					System.out.println("Error in creating table");
 				}
-				pair.clear();
 			}
+				pair.clear();
+			
 		} catch (SQLException sqlex) {
 			sqlex.printStackTrace();
 		}
@@ -123,19 +129,16 @@ public class TableDaoImpl implements TableDao {
 	 * @throws SQLException
 	 *             the SQL exception
 	 */
-	public static Connection getConnection() throws IOException, ClassNotFoundException, SQLException {
-		Properties prop = new Properties();
-		InputStream input = null;
-		input = new FileInputStream(
-				"/home/bridgeit/Downloads/EmbaasLayer-master/MbassLayer/src/main/webapp/WEB-INF/dbConnection.properties");
-		// load a properties file
-		prop.load(input);
-		String drivers = prop.getProperty("jdbc.driver");
-		String connectionURL = prop.getProperty("jdbc.url");
-		String username = prop.getProperty("jdbc.username");
-		String password = prop.getProperty("jdbc.password");
-		Class.forName(drivers);
-		dbConnection = DriverManager.getConnection(connectionURL, username, password);
+	public  Connection getConnection() throws IOException, ClassNotFoundException, SQLException {
+		try
+		{
+			Class.forName(jdbcDriver);
+			dbConnection = DriverManager.getConnection(connectionURL, USER,PASS);
+			
+		}catch(SQLException se){
+		      //Handle errors for JDBC
+		      se.printStackTrace();
+		}
 		return dbConnection;
 	}
 	public String returnDataType(String data_type) {
@@ -156,7 +159,6 @@ public class TableDaoImpl implements TableDao {
 	@Override
 	public String insertJson(String jsonData, BindingResult result) throws IOException, Exception {
 		JSONObject jsonObject = new JSONObject(jsonData);
-		System.out.println("jsonObject Array :"+jsonObject.toString());
 		// loop to get the dynamic key
 		for (Object keys : jsonObject.keySet()) {
 			mTableName = (String) keys;
@@ -212,75 +214,5 @@ public class TableDaoImpl implements TableDao {
 
 		return "successJson";
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.bridgelabz.dao.TableDao#getId(java.lang.String, java.lang.String, java.lang.String)
-	 */
-	@Override
-	public int getId(String tableName,String column_Field,String column_Filed_Value) throws ClassNotFoundException, IOException
-	{
-		int generatedKey =0;
-		try {
-			dbConnection = getConnection();
-			String select_id="select bridge_id from "+tableName+" where "+column_Field+"="+"'"+column_Filed_Value+"'"+';';
-			System.out.println("id query :"+select_id);
-			pstmt=dbConnection.prepareStatement(select_id);
-			
-			ResultSet rs=pstmt.executeQuery(select_id);
-			if (rs.next()) {
-			    generatedKey = rs.getInt(1);
-			}
-			System.out.println("inserted record id :"+generatedKey);
-			returnID(generatedKey);
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}
-		return generatedKey;
-	}
-	public int returnID(int row_Id)
-	{
-		System.out.println("inserted record row id :"+row_Id);
-		return row_Id;
-	}
-	@Override
-	public ArrayList<?> specificRecordDisplay(String tableName, String column_Field, String rowIdValue)
-			throws ClassNotFoundException, IOException {
-		JSONArray myArrayOfRefs= new JSONArray();
-        JSONObject myObject = new JSONObject();
-        String[]strArray=null;
-        String data=null;
-		try {
-			dbConnection = getConnection();
-			String select_query="select * from "+tableName+" where "+column_Field+"="+rowIdValue+';';
-			System.out.println("select query :"+select_query);
-			pstmt=dbConnection.prepareStatement(select_query);
-			ResultSet rs=pstmt.executeQuery(select_query);
-			ResultSetMetaData resultSetMetaData=(ResultSetMetaData) rs.getMetaData();
-			System.out.println("count :"+resultSetMetaData.getColumnCount());
-			for(int i=1;i<=resultSetMetaData.getColumnCount();i++)
-			{
-				while(rs.next()) {
-				data=rs.getString(i);
-				}
-				strArray=data.split("");
-			}
-			for(String s:strArray)
-			{
-				System.out.println(s);
-			}
-			/*int j=0;
-			while(rs.next()) {
-				try
-				{
-					for(j=1;j<10;j++)
-					{
-					System.out.println(rs.getString(j));
-					}
-					j++;*/
-			
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}
-		return null;
-	}
+
 }

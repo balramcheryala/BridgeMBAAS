@@ -1,109 +1,76 @@
+<%@page import="org.bridgelabz.connection.GoogleConnection"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@page import="java.util.logging.Logger"%>
-
+<%
+	GoogleConnection google = new GoogleConnection();
+%>
 <html>
+<title>BridgeMbaas</title>
 <head>
-<title>Popup contact form</title>
-<!-- <link href="css/elements.css" rel="stylesheet"> -->
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/elements.css" />" />
-	<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/bootstrap.css" />" />
-	<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/bootstrap.min.css" />" />
-<script type="text/javascript"
-	src="<c:url value="/resources/js/my_js.js" />"></script>
-</head>
-<!-- bgcolor="Gold" -->
-<!-- Body Starts Here -->
-<body id="body" style="overflow: hidden;" >
-	<style>
+<style type="text/css">
 body {
-	background-color: FloralWhite;
-	margin: 48px 0px 0px 64px;
-}
-
-div#topdiv {
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	color: white;
-	background: Navy;
-	padding: 10px;
-	margin-bottom: 0px;
-	/* overflow: scroll; */
+	background-size: cover;
 }
 </style>
-	<div id="xyz">
-		
-		
-         <nav id="myNavbar" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<!-- Brand and toggle get grouped for better mobile display -->
-	
-		<div class="container-fluid">
-    		<div class="navbar-header">
-    			<a class="navbar-brand" href="#"><img src="resources/images/logo1.png" style="height:50px;width:70px;margin-top:-15px;"/></a>
-   			 </div>
-   		</div>
-		
-	</nav>
-<br>
-<br>
- 
- <div class="col-sm-12">
-        <div class="jumbotron" style="margin-left:-80px;margin-right:-15px;margin-top:-40px;background-color:white">
-          
-        <div class="container-fluid" style="padding-right:90px;margin-left:0px">  
-		<h1 style="color:navy;">Welcome back to BridgeLabz</h1>
-		<p style="color:navy;">Continue building your apps with BridgeMbaas...</p>
-		</div></div></div>
-		<!-- <p><a href="#" class="btn btn-success btn-lg">Get started today</a></p> -->
-	
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+	crossorigin="anonymous">
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 
-		<br></br>
-		<br></br>
-		<br></br>
-		
-		<br>
-		<center>
-			<button id="popup" onclick="div_show()">
-				<h2 class="new_project">CREATE NEW PROJECT</h2>
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+<!-- font awesome css -->
+<link
+	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+	rel="stylesheet">
+</head>
+<body BACKGROUND="<c:url value='/resources/images/back.jpg'/> " />
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+				aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-envelope"></span>
 			</button>
-		</center>
-		<!-- </div> -->
-	</div>
-	<!-- Display Popup Button -->
-	<div id="abc">
-		<!-- Popup Div Starts Here -->
-		<div id="popupContact">
-			<!-- Contact Us Form -->
-			<!-- id="form"  name="form" -->
+			<a class="navbar-brand" href="">BridgeMbaas</a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
 
-			<%
-				Logger logger = Logger.getLogger(this.getClass().getName());
-			%>
 
-			<form action="#" id="form" method="post" name="form">
-				<img id="close"
-					src="<c:url value="/resources/images/close-button-icon.png" />"
-					alt="" onclick="div_hide()" />
-				<%
-					logger.info("Evaluating date ");
-				%>
-				<h2>Create a project</h2>
-				<hr>
-				<input id="name" name="name" placeholder="My Project"
-					type="text">
-				
-				<a href="javascript:%20check_empty()" id="submit">Create Project</a>
-				
+			<form class="navbar-form navbar-left" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Find apps">
+				</div>
+				<button type="submit" class="btn btn-danger">Go</button>
+			</form>
+			<form class="nav navbar-nav navbar-right">
+				<div class="btn-group">
+					<a class='btn btn-danger disabled'><i class="fa fa-google-plus"
+						style="width: 16px; height: 20px"></i></a> <a class='btn btn-danger'
+						href='<%=google.getAuthUrl()%>' style="width: 12em;"> Sign in
+						with Google</a>
+				</div>
 			</form>
 		</div>
-	
 	</div>
-</body>
 </html>

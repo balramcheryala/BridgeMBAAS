@@ -1,9 +1,8 @@
 package org.bridgelabz.validator;
 
+import org.bridgelabz.model.UploadedFile;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
-import org.bridgelabz.model.UploadedFile;
 
 public class FileValidator implements Validator {
 
