@@ -13,6 +13,7 @@
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 	<url-pattern>/twitterpost</url-pattern>
+	<url-pattern>/**</url-pattern>
 	<url-pattern>/dashBoard</url-pattern>
 	<url-pattern>/testdemo</url-pattern>
 	<url-pattern>/signinby</url-pattern>
@@ -20,7 +21,7 @@
 	<url-pattern>/secureuser</url-pattern>
 	<url-pattern>/save</url-pattern>
 	<url-pattern>/project</url-pattern>
-	<url-pattern>/credentialsave</url-pattern>
+	<url-pattern>/providersave</url-pattern>
 	<url-pattern>/newuser</url-pattern>
 	<url-pattern>/credentialadd</url-pattern>
 	<url-pattern>/add</url-pattern>
@@ -44,6 +45,12 @@
 	<url-pattern>/addmbaas</url-pattern>
 	<url-pattern>/userinfo</url-pattern>
 	<url-pattern>/mbaasprojects</url-pattern>
+	<url-pattern>/GOOGLE</url-pattern>
+	<url-pattern>/FACEBOOK</url-pattern>
+	<url-pattern>/GITHUB</url-pattern>
+	<url-pattern>/LINKEDIN</url-pattern>
+	<url-pattern>/TWITTER</url-pattern>
+	
 	</servlet-mapping>
 	<listener>
         <listener-class>

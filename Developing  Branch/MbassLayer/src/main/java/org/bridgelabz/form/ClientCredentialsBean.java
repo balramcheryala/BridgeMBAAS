@@ -14,6 +14,40 @@ public class ClientCredentialsBean {
 	/** The clientid. */
 	private String clientid;
 
+	
+	private String provider;
+
+	
+	private String projectName;
+	
+	/**
+	 * @return the projectName
+	 */
+	public String getProjectName() {
+		return projectName;
+	}
+
+	/**
+	 * @param projectName the projectName to set
+	 */
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	/**
+	 * @return the provider
+	 */
+	public String getProvider() {
+		return provider;
+	}
+
+	/**
+	 * @param provider the provider to set
+	 */
+	public void setProvider(String provider) {
+		this.provider = provider;
+	}
+
 	/**
 	 * Gets the id.
 	 *

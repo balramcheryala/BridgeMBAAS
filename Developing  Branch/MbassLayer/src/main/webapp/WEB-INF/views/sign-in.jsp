@@ -43,15 +43,25 @@
 							class="fa fa-th-large"></i> Auth <i class="fa arrow"></i>
 					</a>
 						<ul>
-							<li><a href="userpage"> Users </a></li>
-							<li class="active"><a href="signinby"> Sign-in Method </a></li>
+							<li class="active"><a href="userpage"> Users </a></li>
+							<li><a href="signinby"> Sign-in Method </a></li>
 						</ul></li>
+						<li><a href="dashboard"> <i class="fa fa-home"></i>
+							DataBase
+					</a></li>
+						<li><a href="testdemo"> <i class="fa fa-twitter"></i>
+							Post
+					</a></li>
 			</aside>
 			<div class="sidebar-overlay" id="sidebar-overlay"></div>
 			<article class="content item-editor-page">
 			<div class="title-block">
 				<h3 class="title">
-					Sign-in providers<span class="sparkline bar" data-type="bar"></span>
+					Sign-in <span class="sparkline bar" data-type="bar"></span>
+				</h3>
+				
+				<h3 class="title">
+					${success} <span class="sparkline bar" data-type="bar"></span>
 				</h3>
 			</div>
 			<form name="item">
@@ -62,7 +72,7 @@
 								<div class="item-col fixed item-col-check"></div>
 								<div class="item-col item-col-header fixed item-col-img md">
 									<div>
-										<span>Provider</span>
+										<span></span>
 									</div>
 								</div>
 								<div class="item-col item-col-header item-col-title">
@@ -113,7 +123,7 @@
 								<div class="item-col item-col-author">
 									<div class="item-heading">Status</div>
 									<div class="no-overflow">
-										<a href="credentialadd">Google Enable/Disable</a>
+										<a href="GOOGLE">Google Enable/Disable</a>
 									</div>
 								</div>
 
@@ -161,7 +171,7 @@
 								<div class="item-col item-col-author">
 									<div class="item-heading">Status</div>
 									<div class="no-overflow">
-										<a href="credentialadd">GitHub Enable/Disable</a>
+										<a href="GITHUB">GitHub Enable/Disable</a>
 									</div>
 								</div>
 
@@ -210,7 +220,7 @@
 								<div class="item-col item-col-author">
 									<div class="item-heading">Status</div>
 									<div class="no-overflow">
-										<a href="credentialadd">Twitter Enable/Disable</a>
+										<a href="TWITTER">Twitter Enable/Disable</a>
 									</div>
 								</div>
 
@@ -259,7 +269,7 @@
 								<div class="item-col item-col-author">
 									<div class="item-heading">Status</div>
 									<div class="no-overflow">
-										<a href="credentialadd">FaceBook Enable/Disable</a>
+										<a href="FACEBOOK">FaceBook Enable/Disable</a>
 									</div>
 								</div>
 
@@ -308,7 +318,7 @@
 								<div class="item-col item-col-author">
 									<div class="item-heading">Status</div>
 									<div class="no-overflow">
-										<a href="credentialadd">LinkedInEnable/Disable</a>
+										<a href="LINKEDIN">LinkedInEnable/Disable</a>
 									</div>
 								</div>
 

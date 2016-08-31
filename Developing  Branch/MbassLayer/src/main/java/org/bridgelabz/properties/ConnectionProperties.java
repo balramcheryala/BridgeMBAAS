@@ -1,16 +1,11 @@
 package org.bridgelabz.properties;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
 /*class ConnectionProperties
  *created: Aug 18, 2016 11:33AM
  *Created By: Balram
  */
 public class ConnectionProperties {
 
-	@Autowired
-	SessionFactory sf;
 	public String TWITTER_CONSUMER_KEY = "M65Cy3KhTd08DOdHeQcLytzg1";
 	public String TWITTER_CONSUMER_SECRET = "xupjwjeQ2UlhDrhs6Vh4deaNgdkBiCdOYDYA5iErYVT6vHGpfp";
 

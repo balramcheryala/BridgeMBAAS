@@ -10,6 +10,7 @@ import org.bridgelabz.form.ClientCredentialsBean;
 import org.bridgelabz.form.ClientDetailsBean;
 import org.bridgelabz.model.ClientCredentialsModel;
 import org.bridgelabz.model.ClientDetailsModel;
+import org.bridgelabz.properties.ConnectionProperties;
 import org.hibernate.Session;
 
 /*class Prepairation
@@ -21,11 +22,15 @@ public class Prepairation {
 
 	// Importing Session
 	Session session;
-
+	
+	ConnectionProperties cp = new ConnectionProperties();
+	
+	
 	// Preparing prepareModel
 	public ClientDetailsModel prepareModel(ClientDetailsBean clientdetailsbean) {
 
 		ClientDetailsModel clientdetailsmodel = new ClientDetailsModel();
+		
 		clientdetailsmodel.setId(clientdetailsbean.getId());
 		clientdetailsmodel.setEmail(clientdetailsbean.getEmail());
 		clientdetailsmodel.setPassword(clientdetailsbean.getPassword());
@@ -43,6 +48,8 @@ public class Prepairation {
 		ClientCredentialsModel clientcredentialsmodel = new ClientCredentialsModel();
 		clientcredentialsmodel.setId(clientcredentialsbean.getId());
 		clientcredentialsmodel.setClientid(clientcredentialsbean.getClientid());
+		clientcredentialsmodel.setProvider(clientcredentialsbean.getProvider());
+		clientcredentialsmodel.setProjectName(clientcredentialsbean.getProjectName());
 		clientcredentialsmodel.setClientpassword(clientcredentialsbean.getClientpassword());
 
 		return clientcredentialsmodel;
@@ -82,6 +89,8 @@ public class Prepairation {
 				clientcredentialbean = new ClientCredentialsBean();
 				clientcredentialbean.setId(crud.getId());
 				clientcredentialbean.setClientid(crud.getClientid());
+				clientcredentialbean.setProvider(crud.getProvider());
+				clientcredentialbean.setProjectName(crud.getProjectName());
 				clientcredentialbean.setClientpassword(crud.getClientpassword());
 				System.out.println(clientcredentialbean);
 			}
@@ -111,7 +120,8 @@ public class Prepairation {
 		clientcredentialbean.setId(clientcredentialmodel.getId());
 		clientcredentialbean.setClientid(clientcredentialmodel.getClientid());
 		clientcredentialbean.setClientpassword(clientcredentialmodel.getClientpassword());
-
+		clientcredentialbean.setProvider(clientcredentialmodel.getProvider());
+		clientcredentialbean.setProjectName(clientcredentialmodel.getProjectName());
 		return clientcredentialbean;
 	}
 
@@ -140,14 +150,4 @@ public class Prepairation {
 		return date;
 	}
 
-	// test database (fetching the field value from databse )
-	public String fetchAppId() {
-
-		String Appid = (String) session
-				.createQuery(
-						"select credentials.clientid from ClientCredentialsModel credentials where credentials.id=:id")
-				.setInteger("id", 1).uniqueResult();
-		return Appid;
-
-	}
 }

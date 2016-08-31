@@ -52,15 +52,7 @@
 				Twitter</a>
 		</div>
 		
-		<br /> <br />
-
-				<div class="btn-group">
-			<a class='btn btn-info'><i class="fa fa-refresh"
-				style="width: 16px; height: 20px"></i></a> <a class='btn btn-info '
-				href='/MbassLayer/twitterpost' style="width: 12em">  Post with
-				Twitter</a><br/>
-				<br/>
-		</div>
+		
 	</center>
 </body>
 </html>

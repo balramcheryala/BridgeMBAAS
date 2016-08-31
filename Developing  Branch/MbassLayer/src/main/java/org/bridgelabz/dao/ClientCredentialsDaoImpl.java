@@ -3,6 +3,8 @@ package org.bridgelabz.dao;
 import java.util.List;
 
 import org.bridgelabz.model.ClientCredentialsModel;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,7 @@ public class ClientCredentialsDaoImpl implements ClientCredentialsDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	Session session ;
 	public void addClientCredentials(ClientCredentialsModel clientcredentialmodel) {
 		sessionFactory.openSession().save(clientcredentialmodel);
 
@@ -42,6 +45,21 @@ public class ClientCredentialsDaoImpl implements ClientCredentialsDao {
 				.createQuery("DELETE FROM ClientCredentialsModel WHERE id = " + clientcredentialmodel.getId())
 				.executeUpdate();
 
+	}
+
+	/* (non-Javadoc)
+	 * @see org.bridgelabz.dao.ClientCredentialsDao#getId(java.lang.String)
+	 */
+	@Override
+	public String getId(String provider) {
+		System.out.println(provider);
+		session = sessionFactory.openSession();
+		String hql2 = "SELECT C.clientid FROM ClientCredentialsModel C where C.provider="+provider;
+		Query query=session.createQuery(hql2);
+		List results = query.list();
+		System.out.println(results.toString());
+		
+		return provider;
 	}
 
 }

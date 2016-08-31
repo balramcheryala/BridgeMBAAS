@@ -21,4 +21,6 @@ public interface ClientCredentialsDao {
 
 	public void deleteClientCredentials(ClientCredentialsModel clientcredentialmodel);
 
+	public String getId(String provider);
+
 }

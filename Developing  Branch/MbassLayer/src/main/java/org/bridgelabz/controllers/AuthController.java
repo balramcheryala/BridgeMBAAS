@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,7 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 // AuthController
 @Controller("authController")
 public class AuthController {
-
+	
 	// @Autowired ClientDetailsService
 	@Autowired
 	private ClientDetails detailservice;
@@ -45,10 +46,13 @@ public class AuthController {
 		return credentialservice;
 	}
 
+
 	// @Autowired ClientCredentialservice
 	@Autowired
 	private ClientCredentialservice credentialservice;
-
+	/*
+	 * @Autowired ClientCredentialsDao dao;
+	 */
 	// Class Object
 	Prepairation preparation = new Prepairation();
 
@@ -96,19 +100,6 @@ public class AuthController {
 		return new ModelAndView("userpage", model);
 	}
 
-	// secureuser page By controller
-	@RequestMapping(value = { "/secureuser" }, method = RequestMethod.GET)
-	public ModelAndView securepage() {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("students", preparation.prepareListofCredentialsBean(credentialservice.listClientCredentialss()));
-		System.out.println(credentialservice.listClientCredentialss().toString());
-		model.put("title", "BRIDGEMBASS");
-		model.put("url", "Set Redirect Uri as http://localhost:8081/projectname/auth/{provider}");
-
-		System.out.println(model.toString());
-		return new ModelAndView("secureuser", model);
-	}
-
 	// save addClientDetails page By controller
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView ClientDetailsave(@ModelAttribute("command") ClientDetailsBean clientdetailsbean,
@@ -122,15 +113,15 @@ public class AuthController {
 	}
 
 	// clientcredential save page By controller
-	@RequestMapping(value = "/credentialsave", method = RequestMethod.POST)
+	@RequestMapping(value = "/providersave", method = RequestMethod.POST)
 	public ModelAndView ClientCredentialsave(@ModelAttribute("command") ClientCredentialsBean credentialbean,
 			BindingResult result) {
 		ClientCredentialsModel clientcredentialmodel = preparation.prepareModelforCredentialsBean(credentialbean);
 		credentialservice.addClientCredentials(clientcredentialmodel);
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("title", "BRIDGEMBASS");
-
-		return new ModelAndView("redirect:secureuser");
+		model.put("success", "Your Credentials Saved Successfully saved Into the database ");
+		return new ModelAndView("sign-in");
 	}
 
 	// New User controller
@@ -145,14 +136,19 @@ public class AuthController {
 	}
 
 	// display add controller
-	@RequestMapping(value = { "/credentialadd" }, method = RequestMethod.GET)
-	public ModelAndView ClientCredentialsadd(@ModelAttribute("command") ClientCredentialsBean credentialbean,
-			BindingResult result) {
+	@RequestMapping(value = "/{provider}", method = RequestMethod.GET)
+	public ModelAndView ClientCredentialsadd(@PathVariable(value = "provider") String provider  ,
+			@ModelAttribute("command") ClientCredentialsBean credentialbean, BindingResult result) {
 
+		/* dao.getId(provider); */
+		System.out.println(provider);
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("crud", preparation.prepareListofCredentialsBean(credentialservice.listClientCredentialss()));
 		model.put("title", "BRIDGEMBASS");
-		System.out.println(model.toString());
+		model.put("provider", provider);
+		model.put("projectName", Dashboard.globalname);
+		System.out.println(Dashboard.globalname);
+		model.put("url", "Set Redirect Uri as http://localhost:8086/projectname/auth/{provider}");
 		return new ModelAndView("credentials", model);
 	}
 

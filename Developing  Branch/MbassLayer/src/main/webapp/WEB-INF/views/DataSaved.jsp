@@ -35,10 +35,17 @@
 
 			<a class='btn btn-info disabled'><i class="fa fa-gittip"
 				style="width: 20px; height: 20px"></i></a> <a class='btn btn-info'
-				href='/bridgembaas/userpage' style="width: 90em;"> Successfully Saved In To Database..</a>
+				href='#' style="width: 90em;"> Successfully
+				Saved In To Database..</a>
+		</div>
+		<br /> <br />
+
+		<div class="btn-group">
+			<a class='btn btn-info'><i class="fa fa-refresh"
+				style="width: 20px; height: 20px"></i></a> <a class='btn btn-info '
+				href='/MbassLayer/twitterpost' style="width: 90em"> Post with
+				Twitter</a><br /> <br />
 		</div>
 
-
-</head>
-
+		</head>
 </html>

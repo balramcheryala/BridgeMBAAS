@@ -35,14 +35,10 @@
 
 			<a class='btn btn-info disabled'><i class="fa fa-gittip"
 				style="width: 20px; height: 20px"></i></a> <a class='btn btn-info'
-				href='https://twitter.com/' style="width: 90em;"> Successfully Posted To Twitter you Can Check hear</a>
+				href='https://twitter.com/' style="width: 90em;"> Successfully
+				Posted To Twitter you Can Check hear</a>
 		</div>
 
 
-</head>
-
-<h1>
-
-Suucessfully posted
-</h1>
+		</head>
 </html>
