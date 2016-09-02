@@ -11,7 +11,6 @@ import org.bridgelabz.controllers.Dashboard;
 import org.bridgelabz.dao.ClientCredentialsDao;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +27,7 @@ import twitter4j.TwitterException;
  */
 
 @Controller("social")
-public class SocialController {
+public class BufferController {
 	Session session;
 
 	@Autowired
@@ -37,28 +36,11 @@ public class SocialController {
 	@Autowired
 	ClientCredentialsDao dao;
 
-	JSONObject jsonObj;
-
 	// Facebook AccessToken
 	String facebookAccessToken;
 
 	// Twitter AccessToken
 	Twitter twitter;
-
-	// Request Mapping For Twitterpost
-
-	@RequestMapping(value = "/twitterpost", method = RequestMethod.POST)
-	public ModelAndView playersList(@RequestParam(value = "tweet", required = true) String post)
-			throws TwitterException {
-		System.out.println(post);
-		StatusUpdate status = new StatusUpdate(post);
-
-		twitter.updateStatus(status);
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("msg", "Successfully posted To Twitter");
-		return new ModelAndView("tweetsuccess", map);
-	}
-
 	/*
 	 * FaceBook Post
 	 */
@@ -99,7 +81,7 @@ public class SocialController {
 
 		// TWITTER POST
 		StatusUpdate status = new StatusUpdate(post);
-		twitter.updateStatus(status);
+		TwitterControllers.twitter.updateStatus(status);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("msg", "Successfully posted To FaceBook And Twitter");
 		return new ModelAndView("bufferpost", map);

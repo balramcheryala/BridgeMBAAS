@@ -38,7 +38,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
@@ -64,7 +64,7 @@
 
 	<!-- Controller Beans Initialization (Social @Balram) -->
 	<bean id="authController" class="org.bridgelabz.socialcontrollers.AuthController" />
-	<bean id="social" class="org.bridgelabz.socialcontrollers.SocialController" />
+	<bean id="social" class="org.bridgelabz.socialcontrollers.BufferController" />
 	<bean id="facebook" class="org.bridgelabz.socialcontrollers.FaceBookController" />
 	<bean id="twittercontroller" class="org.bridgelabz.socialcontrollers.TwitterControllers" />
 	<bean id="linkedin" class="org.bridgelabz.socialcontrollers.LinkedINController" />

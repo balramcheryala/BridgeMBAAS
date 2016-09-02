@@ -6,18 +6,22 @@ package org.bridgelabz.socialcontrollers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.bridgelabz.controllers.Dashboard;
 import org.bridgelabz.dao.ClientCredentialsDao;
+import org.bridgelabz.graph.LinkedInGraph;
+import org.bridgelabz.model.LinkedInDetails;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.json.JSONException;
@@ -32,14 +36,12 @@ import org.springframework.web.servlet.ModelAndView;
  * @author bridgelabz
  *
  */
-@Controller("google")
-public class GoogleController {
-
-	Session session;
-
-	private static String FB_REDIRECT_URI = "http://localhost:8086/MbassLayer/google";
+@Controller("linkedin")
+public class LinkedINController {
 
 	private static String accessToken = "";
+
+	Session session;
 
 	@Autowired
 	public SessionFactory sessionFactory;
@@ -51,30 +53,28 @@ public class GoogleController {
 
 	JSONObject jsonObj;
 
-	@RequestMapping("/googlesignin")
+	public static String LK_REDIRECT_URI = "http://localhost:8086/MbassLayer/linkedin";
+
+	// Invoking a authentication url
 	public String getAuthUrl() {
 		String LoginUrl = "";
 		try {
 
-			LoginUrl = "https://accounts.google.com/o/oauth2/auth?" + "&scope=email%20profile" + "&redirect_uri="
-					+ FB_REDIRECT_URI + "&response_type=code&client_id="
-					+ dao.credentials(Dashboard.globalname, "GOOGLE").get(0) + "&nonce=DgkRrHXmyu3KLd0KDdfq";
+			LoginUrl = "https://www.linkedin.com/oauth/v2/authorization?" + "response_type=code&client_id="
+					+ dao.credentials(Dashboard.globalname, "LINKEDIN").get(0) + "&redirect_uri="
+					+ URLEncoder.encode(LK_REDIRECT_URI, "UTF-8") + "&state=DCEe45A53sdfKef424FWf&scope=r_basicprofile";
 
-		} catch (Exception e) {
+		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		return LoginUrl;
+		return "redirect:" + LoginUrl;
 	}
 
-	// getting Authcode here
-	@RequestMapping(value = "/googlerequest", method = RequestMethod.GET)
-	public ModelAndView google(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+	@RequestMapping(value = "/linkedin", method = RequestMethod.GET)
+	public ModelAndView LinkedIn(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// getiing the autherazation code
 		code = req.getParameter("code");
-
 		System.out.println("Authorization Code : " + code);
-
 		// validating the autherazation code
 		if (code == null || code.equals("")) {
 			throw new RuntimeException("ERROR: Didn't get code parameter in callback.");
@@ -82,48 +82,62 @@ public class GoogleController {
 
 		// getting accesstoken here by exchanging the autherization code with
 		// provider
-		String googleaccessToken = getAccessToken(code);
+		String accessToken = getAccessToken(code);
 
-		System.out.println(googleaccessToken);
-		// paasing the accesstoken to GoogleGraph graph method to access the
-		// user
-		// details
-		// getting the graph user in json format
-		String graph = getGoogleGraph(googleaccessToken);
-		// passing the graph to get graph data for getting the graph from given
-		// json fromat
-		Map<String, String> ProfileData = getGraphData(graph);
-		ServletOutputStream out = res.getOutputStream();
-		out.println("<h1>BRIDGEMBAAS</h1>");
-		out.println("<h2>Google Application Main Menu</h2>");
-		out.println("<div>Welcome " + ProfileData.get("fullname"));
-		out.println("<div>Your first_name: " + ProfileData.get("first_name"));
-		out.println("<div>Your last_name: " + ProfileData.get("last_name"));
-		out.println("<div>You are " + ProfileData.get("gender"));
-		out.println("<div>Your'e birthday " + ProfileData.get("birthday"));
-		out.println("<div>About :" + ProfileData.get("bio"));
+		try {
+			jsonObj = new JSONObject(accessToken);
+			System.out.println(jsonObj.get("access_token"));
+			// paasing the accesstoken to LinkedInGraph graph method to access
+			// the user
+			// details
+			LinkedInGraph Graph = new LinkedInGraph(jsonObj.get("access_token").toString());
+			// getting the graph user in json format
+			String graph = Graph.getGraph();
+			// passing the graph to get graph data for getting the graph from
+			// given
+			// json fromat
+			Map<String, String> ProfileData = Graph.getGraphData(graph);
+			// Parsed Data Storing into the DataBase
+			session = sessionFactory.openSession();
+			LinkedInDetails details = new LinkedInDetails();
+			details.setAccessToken(accessToken);
+			details.setLinkedinId(ProfileData.get("id"));
+			details.setProjectName(Dashboard.globalname);
+			details.setFirstName(ProfileData.get("firstName"));
+			details.setHeadline(ProfileData.get("headline"));
+			details.setIndustry(ProfileData.get("industry"));
+			details.setPictureUrl(ProfileData.get("pictureUrl"));
+			details.setPublicProfileUrl(ProfileData.get("publicProfileUrl"));
+			session.save(details);
+			session.close();
+
+		} catch (JSONException e) {
+
+			e.printStackTrace();
+		}
 		return new ModelAndView("DataSaved");
 
 	}
 
 	// Sending Code With Our Client_id & client_SecretCode To Graph_url For
 	// Token
+	// creating a connection to grapghurl
 	public String getGraphUrl(String code) {
-		System.out.println(code);
 		String GraphUrl = "";
 		try {
+			GraphUrl = "https://www.linkedin.com/oauth/v2/accessToken?" + "grant_type=authorization_code&code=" + code
+					+ "&redirect_uri=" + URLEncoder.encode(LK_REDIRECT_URI, "UTF-8") + "&client_id="
+					+ dao.credentials(Dashboard.globalname, "LINKEDIN").get(0) + "&client_secret="
+					+ dao.credentials(Dashboard.globalname, "LINKEDIN").get(1);
 
-			GraphUrl = "https://accounts.google.com/o/oauth2/token?" + "code=" + code + "grant_type=authorization_code"
-					+ "&client_id=" + dao.credentials(Dashboard.globalname, "GOOGLE").get(0) + "&client_secret="
-					+ dao.credentials(Dashboard.globalname, "GOOGLE").get(1) + "&redirect_uri=" + FB_REDIRECT_URI;
-
-		} catch (Exception e) {
+		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		return GraphUrl;
 	}
 
 	// Exchanging Code and Generating Access Token Here
+	// getting accesstoken
 	public String getAccessToken(String code) {
 		if ("".equals(accessToken)) {
 			URL GraphURL;
@@ -133,39 +147,45 @@ public class GoogleController {
 				e.printStackTrace();
 				throw new RuntimeException("Invalid code received " + e);
 			}
-			URLConnection GoogleConnection;
+			URLConnection Connection;
 			StringBuffer b = null;
 			try {
-				GoogleConnection = GraphURL.openConnection();
+				Connection = GraphURL.openConnection();
 
 				BufferedReader in;
-				in = new BufferedReader(new InputStreamReader(GoogleConnection.getInputStream()));
+				in = new BufferedReader(new InputStreamReader(Connection.getInputStream()));
 				String inputLine;
+
+				// reading a accesstoken from jsp page
 				b = new StringBuffer();
 				while ((inputLine = in.readLine()) != null)
 					b.append(inputLine + "\n");
 				in.close();
 			} catch (IOException e) {
 				e.printStackTrace();
-				throw new RuntimeException("Unable to connect with Google " + e);
+				throw new RuntimeException("Unable to connect with Facebook " + e);
 			}
 
 			accessToken = b.toString();
-			// Validating a AccessToken Got from the APIProvider
+			// Validating a AccessToken Got from the APiProvider
 			if (accessToken.startsWith("[")) {
 				throw new RuntimeException("ERROR: Access Token Invalid: " + accessToken);
 			}
 		}
-		System.out.println(accessToken);
 		return accessToken;
 	}
 
-	// get graph data
-	public String getGoogleGraph(String accessToken) {
+	/**
+	 * Gets the graph.
+	 *
+	 * @return the graph
+	 */
+	public String getGraph() {
 		String graph = null;
 		try {
 
-			String g = "https://www.googleapis.com/plus/v1/people/me?access_token=" + accessToken;
+			String g = "https://api.linkedin.com/v1/people/~:(id,firstName,location,headline,industry,public-profile-url,picture-url)?oauth2_access_token="
+					+ accessToken + "&format=json";
 			URL u = new URL(g);
 			URLConnection c = u.openConnection();
 			BufferedReader in = new BufferedReader(new InputStreamReader(c.getInputStream()));
@@ -183,10 +203,17 @@ public class GoogleController {
 		return graph;
 	}
 
-	public Map<String, String> getGraphData(String GoogleGraph) {
+	/**
+	 * Gets the graph data.
+	 *
+	 * @param Graph
+	 *            the graph
+	 * @return the graph data
+	 */
+	public Map<String, String> getGraphData(String Graph) {
 		Map<String, String> Profile = new HashMap<String, String>();
 		try {
-			JSONObject json = new JSONObject(GoogleGraph);
+			JSONObject json = new JSONObject(Graph);
 			Profile.put("id", json.getString("id"));
 
 			Profile.put("firstName", json.getString("firstName"));
@@ -205,9 +232,8 @@ public class GoogleController {
 
 		} catch (JSONException e) {
 			e.printStackTrace();
-			throw new RuntimeException("ERROR in parsing Google graph data. " + e);
+			throw new RuntimeException("ERROR in parsing LinkedIn graph data. " + e);
 		}
 		return Profile;
 	}
-
 }

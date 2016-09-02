@@ -20,6 +20,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import twitter4j.StatusUpdate;
@@ -46,7 +48,44 @@ public class TwitterControllers {
 	ClientCredentialsDao dao;
 
 	// Twitter AccessToken
-	Twitter twitter;
+	public static Twitter twitter;
+
+	/*
+	 * 
+	 * Twitter Sign In Controller
+	 */
+	@RequestMapping("/twittersignin")
+	public void twitterSignin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// configure twitter api with consumer key and secret key
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+
+		// fetching the credentials from the database
+		cb.setDebugEnabled(true).setOAuthConsumerKey(dao.credentials(Dashboard.globalname, "TWITTER").get(0))
+				.setOAuthConsumerSecret(dao.credentials(Dashboard.globalname, "TWITTER").get(1));
+		TwitterFactory tf = new TwitterFactory(cb.build());
+		Twitter twitter = tf.getInstance();
+		request.getSession().setAttribute("twitter", twitter);
+		try {
+
+			// setup callback URL
+			StringBuffer callbackURL = request.getRequestURL();
+			int index = callbackURL.lastIndexOf("/");
+			callbackURL.replace(index, callbackURL.length(), "").append("/twitter");
+
+			// get request object and save to session
+			RequestToken requestToken = twitter.getOAuthRequestToken(callbackURL.toString());
+			System.out.println(requestToken);
+			request.getSession().setAttribute("requestToken", requestToken);
+
+			// redirect to twitter authentication URL
+			response.sendRedirect(requestToken.getAuthenticationURL());
+
+		} catch (TwitterException e) {
+			throw new ServletException(e);
+		}
+
+	}
 
 	/*
 	 * Twitter Controller
@@ -91,6 +130,20 @@ public class TwitterControllers {
 		return new ModelAndView("DataSaved", map);
 	}
 
+	// Request Mapping For Twitterpost
+
+	@RequestMapping(value = "/twitterpost", method = RequestMethod.POST)
+	public ModelAndView playersList(@RequestParam(value = "tweet", required = true) String post)
+			throws TwitterException {
+		System.out.println(post);
+		StatusUpdate status = new StatusUpdate(post);
+
+		twitter.updateStatus(status);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("msg", "Successfully posted To Twitter");
+		return new ModelAndView("tweetsuccess", map);
+	}
+
 	// Method For Upload Pic For Twitter
 
 	public void uploadPic(File file, String message) throws Exception {
@@ -103,40 +156,4 @@ public class TwitterControllers {
 		}
 	}
 
-	/*
-	 * 
-	 * Twitter Sign In Controller
-	 */
-	@RequestMapping("/twittersignin")
-	public void twitterSignin(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// configure twitter api with consumer key and secret key
-		ConfigurationBuilder cb = new ConfigurationBuilder();
-
-		// fetching the credentials from the database
-		cb.setDebugEnabled(true).setOAuthConsumerKey(dao.credentials(Dashboard.globalname, "TWITTER").get(0))
-				.setOAuthConsumerSecret(dao.credentials(Dashboard.globalname, "TWITTER").get(1));
-		TwitterFactory tf = new TwitterFactory(cb.build());
-		Twitter twitter = tf.getInstance();
-		request.getSession().setAttribute("twitter", twitter);
-		try {
-
-			// setup callback URL
-			StringBuffer callbackURL = request.getRequestURL();
-			int index = callbackURL.lastIndexOf("/");
-			callbackURL.replace(index, callbackURL.length(), "").append("/twitter");
-
-			// get request object and save to session
-			RequestToken requestToken = twitter.getOAuthRequestToken(callbackURL.toString());
-			System.out.println(requestToken);
-			request.getSession().setAttribute("requestToken", requestToken);
-
-			// redirect to twitter authentication URL
-			response.sendRedirect(requestToken.getAuthenticationURL());
-
-		} catch (TwitterException e) {
-			throw new ServletException(e);
-		}
-
-	}
 }

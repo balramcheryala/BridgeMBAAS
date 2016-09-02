@@ -11,14 +11,13 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.bridgelabz.controllers.Dashboard;
 import org.bridgelabz.dao.ClientCredentialsDao;
-import org.bridgelabz.model.GitHubDetails;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.json.JSONException;
@@ -33,10 +32,12 @@ import org.springframework.web.servlet.ModelAndView;
  * @author bridgelabz
  *
  */
-@Controller("github")
-public class GitHubController {
+@Controller("google")
+public class GoogleController {
 
 	Session session;
+
+	private static final String GG_REDIRECT_URI = "http://localhost:8086/MbassLayer/mbaasprojects";
 
 	private static String accessToken = "";
 
@@ -50,33 +51,31 @@ public class GitHubController {
 
 	JSONObject jsonObj;
 
-	private String GH_REDIRECT_URI = "http://localhost:8086/MbassLayer/github";
-	// Invoking a authentication url
+	public static final String GG_APP_ID = "1063203149782-3c2mc0mgb6b1uu4ta9hj720c1ecoopdq.apps.googleusercontent.com";
+	public static final String GG_APP_SECRET = "glOO8FTt5F_9C8VFdvUxf3ON";
 
-	@RequestMapping(value = "/githubrequest", method = RequestMethod.GET)
+	@RequestMapping("/googlesignin")
 	public String getAuthUrl() {
 		String LoginUrl = "";
 		try {
 
-			LoginUrl = "https://github.com/login/oauth/authorize?" + "client_id="
-					+ dao.credentials(Dashboard.globalname, "GITHUB").get(0) + "&redirect_uri=" + GH_REDIRECT_URI
-					+ "&scope=user";
+			LoginUrl = "https://accounts.google.com/o/oauth2/auth?" + "&scope=email%20profile" + "&redirect_uri="
+					+ GG_REDIRECT_URI + "&response_type=code&client_id=" + GG_APP_ID + "&nonce=DgkRrHXmyu3KLd0KDdfq";
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return LoginUrl;
+		return "redirect:" + LoginUrl;
 	}
 
-	/*
-	 * GitHub Controller
-	 */
-
-	@RequestMapping(value = "/github", method = RequestMethod.GET)
-	public ModelAndView GitHub(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	// getting Authcode here
+	@RequestMapping(value = "/googlerequest", method = RequestMethod.GET)
+	public ModelAndView google(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		// getiing the autherazation code
 		code = req.getParameter("code");
+
+		System.out.println("Authorization Code : " + code);
 
 		// validating the autherazation code
 		if (code == null || code.equals("")) {
@@ -85,55 +84,48 @@ public class GitHubController {
 
 		// getting accesstoken here by exchanging the autherization code with
 		// provider
-		String accessToken = getAccessToken(code);
+		String googleaccessToken = getAccessToken(code);
 
+		System.out.println(googleaccessToken);
+		// paasing the accesstoken to GoogleGraph graph method to access the
+		// user
+		// details
 		// getting the graph user in json format
-		String graph = getGitHubGraph(accessToken);
-
+		String graph = getGoogleGraph(googleaccessToken);
 		// passing the graph to get graph data for getting the graph from given
 		// json fromat
 		Map<String, String> ProfileData = getGraphData(graph);
-
-		// getting the parsed user provider id here
-		session = sessionFactory.openSession();
-		GitHubDetails details = new GitHubDetails();
-		details.setAccessToken(accessToken);
-		details.setProjectName(Dashboard.globalname);
-		details.setGithubId(ProfileData.get("id"));
-		details.setLogin(ProfileData.get("login"));
-		details.setFollowers_url(ProfileData.get("followers_url"));
-		details.setRepos_url(ProfileData.get("repos_url"));
-		details.setBio(ProfileData.get("bio"));
-		details.setAvatar_url(ProfileData.get("avatar_url"));
-		details.setName(ProfileData.get("name"));
-		details.setLocation(ProfileData.get("location"));
-		details.setCreated_at(ProfileData.get("created_at"));
-		details.setUpdated_at(ProfileData.get("updated_at"));
-		session.save(details);
-		session.close();
+		ServletOutputStream out = res.getOutputStream();
+		out.println("<h1>BRIDGEMBAAS</h1>");
+		out.println("<h2>Google Application Main Menu</h2>");
+		out.println("<div>Welcome " + ProfileData.get("fullname"));
+		out.println("<div>Your first_name: " + ProfileData.get("first_name"));
+		out.println("<div>Your last_name: " + ProfileData.get("last_name"));
+		out.println("<div>You are " + ProfileData.get("gender"));
+		out.println("<div>Your'e birthday " + ProfileData.get("birthday"));
+		out.println("<div>About :" + ProfileData.get("bio"));
 		return new ModelAndView("DataSaved");
+
 	}
 
 	// Sending Code With Our Client_id & client_SecretCode To Graph_url For
 	// Token
-	// creating a connection to grapghurl
 	public String getGraphUrl(String code) {
+		System.out.println(code);
 		String GraphUrl = "";
 		try {
 
-			GraphUrl = "https://github.com/login/oauth/access_token?client_id="
-					+ dao.credentials(Dashboard.globalname, "GITHUB").get(0) + "&redirect_uri=" + GH_REDIRECT_URI
-					+ "&client_secret=" + dao.credentials(Dashboard.globalname, "GITHUB").get(1) + "&code=" + code;
+			GraphUrl = "https://accounts.google.com/o/oauth2/token?" + "code=" + code + "grant_type=authorization_code"
+					+ "&client_id=" + GG_APP_ID + "&client_secret=" + GG_APP_SECRET + "&redirect_uri="
+					+ GG_REDIRECT_URI;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return GraphUrl;
 	}
 
 	// Exchanging Code and Generating Access Token Here
-	// getting accesstoken
 	public String getAccessToken(String code) {
 		if ("".equals(accessToken)) {
 			URL GraphURL;
@@ -143,28 +135,26 @@ public class GitHubController {
 				e.printStackTrace();
 				throw new RuntimeException("Invalid code received " + e);
 			}
-			URLConnection Connection;
+			URLConnection GoogleConnection;
 			StringBuffer b = null;
 			try {
-				// openingConnection of fbgraph url
-				Connection = GraphURL.openConnection();
+				GoogleConnection = GraphURL.openConnection();
 
 				BufferedReader in;
-				in = new BufferedReader(new InputStreamReader(Connection.getInputStream()));
+				in = new BufferedReader(new InputStreamReader(GoogleConnection.getInputStream()));
 				String inputLine;
 				b = new StringBuffer();
-				// reading a accesstoken from jsp page
 				while ((inputLine = in.readLine()) != null)
 					b.append(inputLine + "\n");
 				in.close();
 			} catch (IOException e) {
 				e.printStackTrace();
-				throw new RuntimeException("Unable to connect with GitHub " + e);
+				throw new RuntimeException("Unable to connect with Google " + e);
 			}
 
 			accessToken = b.toString();
-			// Validating a AccessToken Got from the APiProvider
-			if (accessToken.startsWith("{")) {
+			// Validating a AccessToken Got from the APIProvider
+			if (accessToken.startsWith("[")) {
 				throw new RuntimeException("ERROR: Access Token Invalid: " + accessToken);
 			}
 		}
@@ -172,11 +162,12 @@ public class GitHubController {
 		return accessToken;
 	}
 
-	public String getGitHubGraph(String accesstoken) {
+	// get graph data
+	public String getGoogleGraph(String accessToken) {
 		String graph = null;
 		try {
 
-			String g = "https://api.github.com/user?" + accessToken;
+			String g = "https://www.googleapis.com/plus/v1/people/me?access_token=" + accessToken;
 			URL u = new URL(g);
 			URLConnection c = u.openConnection();
 			BufferedReader in = new BufferedReader(new InputStreamReader(c.getInputStream()));
@@ -189,36 +180,34 @@ public class GitHubController {
 			System.out.println(graph);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("ERROR in getting graph data. " + e);
+			throw new RuntimeException("ERROR in getting FB graph data. " + e);
 		}
 		return graph;
 	}
 
-	public Map<String, String> getGraphData(String GithubGraph) {
+	public Map<String, String> getGraphData(String GoogleGraph) {
 		Map<String, String> Profile = new HashMap<String, String>();
 		try {
-			JSONObject json = new JSONObject(GithubGraph);
+			JSONObject json = new JSONObject(GoogleGraph);
 			Profile.put("id", json.getString("id"));
-			Profile.put("login", json.getString("login"));
-			if (json.has("followers_url"))
-				Profile.put("followers_url", json.getString("followers_url"));
-			if (json.has("repos_url"))
-				Profile.put("repos_url", json.getString("repos_url"));
-			if (json.has("bio"))
-				Profile.put("bio", json.getString("bio"));
-			if (json.has("avatar_url"))
-				Profile.put("avatar_url", json.getString("avatar_url"));
-			if (json.has("name"))
-				Profile.put("name", json.getString("name"));
-			if (json.has("location"))
-				Profile.put("location", json.getString("location"));
-			if (json.has("created_at"))
-				Profile.put("created_at", json.getString("created_at"));
-			if (json.has("updated_at"))
-				Profile.put("updated_at", json.getString("updated_at"));
+
+			Profile.put("firstName", json.getString("firstName"));
+
+			if (json.has("headline"))
+				Profile.put("headline", json.getString("headline"));
+
+			if (json.has("industry"))
+				Profile.put("industry", json.getString("industry"));
+
+			if (json.has("pictureUrl"))
+				Profile.put("pictureUrl", json.getString("pictureUrl"));
+
+			if (json.has("publicProfileUrl"))
+				Profile.put("publicProfileUrl", json.getString("publicProfileUrl"));
+
 		} catch (JSONException e) {
 			e.printStackTrace();
-			throw new RuntimeException("ERROR in parsing FB graph data. " + e);
+			throw new RuntimeException("ERROR in parsing Google graph data. " + e);
 		}
 		return Profile;
 	}

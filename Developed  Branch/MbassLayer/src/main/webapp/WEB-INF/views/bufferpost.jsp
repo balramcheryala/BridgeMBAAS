@@ -25,11 +25,27 @@ audio, canvas, progress, video {
 	display: inline-block
 }
 
-audio:not ([controls] ){
-	display: none;
-	height: 0
-}
+audio
+:not
+ 
+(
+[
+controls
+]
+ 
+){
+display
+:
+ 
+none
+;
 
+	
+height
+:
+ 
+0
+}
 progress {
 	vertical-align: baseline
 }
@@ -97,10 +113,20 @@ img {
 	border-style: none
 }
 
-svg:not (:root ){
-	overflow: hidden
-}
+svg
+:not
+ 
+(
+:root
+ 
+){
+overflow
+:
+ 
+hidden
 
+
+}
 code, kbd, pre, samp {
 	font-family: monospace, monospace;
 	font-size: 1em
@@ -270,24 +296,21 @@ body {
 </style>
 </head>
 <body>
-	<form action="/MbassLayer/bufferpost" method ="POST">
-	<h1 style="color:white">${msg}</h1>
+	<form action="/MbassLayer/bufferpost" method="POST">
+		<h1 style="color: white">${msg}</h1>
 		<div class="text-input">
 			<input type="text" name="post" value=""
 				placeholder="         Post something in here!"> <label
-				for="input1">Post Here</label> 
-				<br/>
-				<br/><input type="submit" value="Post">
+				for="input1">Post Here</label> <br /> <br />
+			<input type="submit" value="Post">
 		</div>
 	</form>
-	
-	<br/>
-	<br/>
-	<form action="/MbassLayer/">
+	<form action="/MbassLayer/signinby">
 		<div class="text-input">
-		<input type="submit" value="Back To Home">
+			<input type="submit" value="Back To Home">
 		</div>
 	</form>
-	
+
+
 </body>
 </html>
