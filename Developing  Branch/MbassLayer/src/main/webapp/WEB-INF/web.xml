@@ -13,9 +13,18 @@
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
 	<url-pattern>/twitterpost</url-pattern>
-	<url-pattern>/**</url-pattern>
+	<url-pattern>/facebookpost</url-pattern>
+	
+	<url-pattern>/linkedinrequest</url-pattern>
+	<url-pattern>/githubrequest</url-pattern>
+	<url-pattern>/facebookrequest</url-pattern>
+	<url-pattern>/googlesignin</url-pattern>
+	<url-pattern>/twittersignin</url-pattern>
+	
+	
 	<url-pattern>/dashBoard</url-pattern>
 	<url-pattern>/testdemo</url-pattern>
+	<url-pattern>/bufferget</url-pattern>
 	<url-pattern>/signinby</url-pattern>
 	<url-pattern>/userpage</url-pattern>
 	<url-pattern>/secureuser</url-pattern>
@@ -28,18 +37,26 @@
 	<url-pattern>/update</url-pattern>
 	<url-pattern>/delete</url-pattern>
 	<url-pattern>/edit</url-pattern>
+	<url-pattern>/bufferpost</url-pattern>
 	<url-pattern>/facebook</url-pattern>
+	<url-pattern>/fbpost</url-pattern>
 	<url-pattern>/linkedin</url-pattern>
 	<url-pattern>/google</url-pattern>
 	<url-pattern>/github</url-pattern>
 	<url-pattern>/twitter</url-pattern>
-	<url-pattern>/post</url-pattern>
 	<url-pattern>/signin</url-pattern>
 	<url-pattern>/dashboard</url-pattern>
 	<url-pattern>/fileUploadForm</url-pattern>
 	<url-pattern>/insert</url-pattern>
-	<url-pattern>/select</url-pattern>
 	<url-pattern>/jsonData</url-pattern>
+	<url-pattern>/selectAll</url-pattern>
+    <url-pattern>/displayAll</url-pattern>
+    <url-pattern>/deleteId</url-pattern>
+    <url-pattern>/updateId</url-pattern>
+    <url-pattern>/updateRow</url-pattern>
+    <url-pattern>/remove</url-pattern>
+    <url-pattern>/specific</url-pattern>
+    <url-pattern>/columnRowId</url-pattern>
 	<url-pattern>*.htm</url-pattern>
 	<url-pattern>/overview</url-pattern>
 	<url-pattern>/addmbaas</url-pattern>
@@ -50,7 +67,8 @@
 	<url-pattern>/GITHUB</url-pattern>
 	<url-pattern>/LINKEDIN</url-pattern>
 	<url-pattern>/TWITTER</url-pattern>
-	
+	<url-pattern>/poverview</url-pattern>
+	<url-pattern>/**</url-pattern>
 	</servlet-mapping>
 	<listener>
         <listener-class>

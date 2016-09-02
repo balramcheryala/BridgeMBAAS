@@ -40,7 +40,6 @@ public class ClientDetailsServiceImpl implements ClientDetails {
 
 	public void updateClientDetails(ClientDetailsModel cdm) {
 		cdd.updateClientDetails(cdm);
-
 	}
 
 }

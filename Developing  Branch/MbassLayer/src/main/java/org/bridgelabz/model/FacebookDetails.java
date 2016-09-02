@@ -24,6 +24,41 @@ public class FacebookDetails {
 	@Column(name = "facebookid")
 	private String facebookid;
 
+	@Column(name = "accessToken")
+	private String accessToken;
+	
+	
+	
+	@Column(name = "projectname")
+	private String projectname;
+	/**
+	 * @return the projectname
+	 */
+	public String getProjectname() {
+		return projectname;
+	}
+
+	/**
+	 * @param projectname the projectname to set
+	 */
+	public void setProjectname(String projectname) {
+		this.projectname = projectname;
+	}
+
+	/**
+	 * @return the accessToken
+	 */
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	/**
+	 * @param accessToken the accessToken to set
+	 */
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
 	@Column(name = "name")
 	private String name;
 

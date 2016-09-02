@@ -1,5 +1,5 @@
 <html>
-<title>BridgeMbaas</title>
+<title>success</title>
 <head>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -32,18 +32,17 @@
 	<center>
 		<br /> <br />
 		<div class="btn-group">
-
+<h1>${msg}</h1>
 			<a class='btn btn-info disabled'><i class="fa fa-gittip"
 				style="width: 20px; height: 20px"></i></a> <a class='btn btn-info'
-				href='#' style="width: 90em;"> ${msg}</a>
+				href='' style="width: 90em;"> Successfully Posted To Twitter .... </a>
 		</div>
-		<br /> <br />
+		<br/>
+		<br/>
+			<div class="btn-group">
 
-		<div class="btn-group">
-			<a class='btn btn-info'><i class="fa fa-refresh"
-				style="width: 20px; height: 20px"></i></a> <a class='btn btn-info '
-				href='/MbassLayer/testdemo' style="width: 90em">Back To Home</a><br /> <br />
+			<a class='btn btn-info disabled'><i class="fa fa-link"
+				style="width: 20px; height: 20px"></i></a> <a class='btn btn-info'
+				href='MbassLayer/' style="width: 90em;"> Go Back .... </a>
 		</div>
-
-		</head>
 </html>

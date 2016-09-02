@@ -48,7 +48,7 @@
 							<li class="active"><a href="userpage"> Users </a></li>
 							<li><a href="signinby"> Sign-in Method </a></li>
 						</ul></li>
-						<li><a href="dashboard"> <i class="fa fa-home"></i>
+						<li><a href="#"> <i class="fa fa-home"></i>
 							DataBase
 					</a></li>
 						<li><a href="testdemo"> <i class="fa fa-twitter"></i>

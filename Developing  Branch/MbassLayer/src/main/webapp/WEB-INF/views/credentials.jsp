@@ -81,13 +81,13 @@
 					</div>
 					<div class="form-group">
 						<label for="password"></label>
-						<form:input type="show" path="provider"
+						<form:input type="hidden" path="provider"
 							class="form-control underlined" value="${provider}" />
 					</div>
 					
 					<div class="form-group">
 						<label for="password"></label>
-						<form:input type="show" path="projectName"
+						<form:input type="hidden" path="projectName"
 							class="form-control underlined" value="${projectName}" />
 					</div>
 					<button type="submit" class="btn btn-block btn-primary">Sumbit</button>

@@ -62,26 +62,25 @@
 	<bean id="fff" class="org.bridgelabz.service.ProjectServiceImpl" />
 
 
-	
-	<bean id="authController" class="org.bridgelabz.controllers.AuthController" />
-	<bean id="social" class="org.bridgelabz.controllers.SocialController" />
+	<!-- Controller Beans Initialization (Social @Balram) -->
+	<bean id="authController" class="org.bridgelabz.socialcontrollers.AuthController" />
+	<bean id="social" class="org.bridgelabz.socialcontrollers.SocialController" />
+	<bean id="facebook" class="org.bridgelabz.socialcontrollers.FaceBookController" />
+	<bean id="twittercontroller" class="org.bridgelabz.socialcontrollers.TwitterControllers" />
+	<bean id="linkedin" class="org.bridgelabz.socialcontrollers.LinkedINController" />
+	<bean id="google" class="org.bridgelabz.socialcontrollers.GoogleController" />
+	<bean id="github" class="org.bridgelabz.socialcontrollers.GitHubController" />
+
+
+
 	<bean id="project" class="org.bridgelabz.controllers.Dashboard" />
-
-
 	<bean id="upload" class="org.bridgelabz.controllers.UploadController" />
 	<bean id="ccdi" class="org.bridgelabz.dao.ClientCredentialsDaoImpl" />
 	<bean id="cddi" class="org.bridgelabz.dao.ClientDetailsDaoImpl" />
 	<bean id="qwerty" class="org.bridgelabz.dao.CreationDaoImpl" />
 	<bean id="dao" class="org.bridgelabz.dao.TableDaoImpl" />
-
-
-	<bean id="def" class="org.bridgelabz.validator.FileValidator" />
+	<bean id="fileValidator" class="org.bridgelabz.validator.FileValidator" />
 	<bean id="file" class="org.bridgelabz.util.JSONUtils" />
-
-
-
-
-
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />

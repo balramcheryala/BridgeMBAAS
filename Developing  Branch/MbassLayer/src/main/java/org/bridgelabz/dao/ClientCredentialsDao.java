@@ -1,8 +1,10 @@
 package org.bridgelabz.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bridgelabz.model.ClientCredentialsModel;
+import org.bridgelabz.service.ClientDetails;
 
 /*interface ClientCredentialsModelDao.
  *created: Aug 18, 2016 11:33AM
@@ -21,6 +23,7 @@ public interface ClientCredentialsDao {
 
 	public void deleteClientCredentials(ClientCredentialsModel clientcredentialmodel);
 
-	public String getId(String provider);
-
+	public  ArrayList<String> credentials(String projectname, String appType);
+	
+	public String AccessToken(String projectname,String tableName);
 }

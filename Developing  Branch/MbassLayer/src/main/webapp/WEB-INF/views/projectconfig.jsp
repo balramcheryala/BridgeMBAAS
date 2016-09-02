@@ -111,7 +111,7 @@
 			</div>
 				<div class="widget" align="center">
 					<br>
-					<div class="chart" align="center">Welcome to MBAAS BridgeLabz! Get started here.</div>
+					<div class="chart" align="center">Welcome to BridgeMBaaS! Get started here.</div>
 					<div class="dashBtn">
 					<a class="w3-btn-floating-large w3-teal" href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all ui-icon-check ui-btn-icon-left"><i><img alt="" src="resources/images/androidlogo.png" width="50px" height=50px style="margin-top:20%;"></i></a>
 					<div class="text">Android App</div>

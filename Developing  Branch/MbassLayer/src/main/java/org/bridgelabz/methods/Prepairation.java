@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
 import org.bridgelabz.form.ClientCredentialsBean;
 import org.bridgelabz.form.ClientDetailsBean;
 import org.bridgelabz.model.ClientCredentialsModel;
 import org.bridgelabz.model.ClientDetailsModel;
-import org.bridgelabz.properties.ConnectionProperties;
 import org.hibernate.Session;
 
 /*class Prepairation
@@ -22,15 +20,12 @@ public class Prepairation {
 
 	// Importing Session
 	Session session;
-	
-	ConnectionProperties cp = new ConnectionProperties();
-	
-	
+
 	// Preparing prepareModel
 	public ClientDetailsModel prepareModel(ClientDetailsBean clientdetailsbean) {
 
 		ClientDetailsModel clientdetailsmodel = new ClientDetailsModel();
-		
+
 		clientdetailsmodel.setId(clientdetailsbean.getId());
 		clientdetailsmodel.setEmail(clientdetailsbean.getEmail());
 		clientdetailsmodel.setPassword(clientdetailsbean.getPassword());

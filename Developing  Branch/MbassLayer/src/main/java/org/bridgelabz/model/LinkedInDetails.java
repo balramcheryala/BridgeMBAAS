@@ -22,9 +22,38 @@ public class LinkedInDetails {
 
 	@Column(name = "firstName")
 	private String firstName;
-	
+
 	@Column(name = "LinkedinId")
 	private String LinkedinId;
+
+	@Column(name = "projectName")
+	private String projectName;
+
+	/**
+	 * @return the projectName
+	 */
+	public String getProjectName() {
+		return projectName;
+	}
+
+	/**
+	 * @param projectName
+	 *            the projectName to set
+	 */
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+	@Column(name = "accessToken")
+	private String accessToken;
 
 	@Column(name = "headline")
 	private String headline;

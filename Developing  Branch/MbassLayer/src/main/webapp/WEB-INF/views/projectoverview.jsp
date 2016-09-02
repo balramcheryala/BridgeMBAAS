@@ -72,8 +72,7 @@
 		</div>
 		<div class="side-nav">
 			<div class="logo">
-			<!-- <a href="projectlist"> -->
-						<span>BridgeLabz</span>
+						<span>BridgeMBasS</span>
 						<!-- </a> -->
 			
 			</div>
@@ -82,9 +81,7 @@
 					<li>
 						<a href="#">
 							<span><i><img alt="" src="resources/images/home.png" width="25px" height=25px style="margin-top:20%;"></i></span>
-							<%-- <c:forEach items="${projectname}" var="projectname"> --%>
 							<span >${projectname}</span>
-							<%-- </c:forEach> --%>
 						</a>
 					</li>
 					<li>
@@ -109,7 +106,7 @@
 			<!-- 525px -->
 				<div class="widget" align="center" style="height:525px">
 					<br>
-					<div class="chart" align="center">Welcome to MBAAS BridgeLabz! Get started here.</div>
+					<div class="chart" align="center">Welcome to BridgeMaaS! Get started here.</div>
 					<div class="dashBtn">
 					<a class="w3-btn-floating-large w3-teal" href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all ui-icon-check ui-btn-icon-left"><i><img alt="" src="resources/images/androidlogo.png" width="50px" height=50px style="margin-top:20%;"></i></a>
 					<div class="text">Android App</div>

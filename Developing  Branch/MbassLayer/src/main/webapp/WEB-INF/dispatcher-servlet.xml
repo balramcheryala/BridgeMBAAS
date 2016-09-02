@@ -14,9 +14,10 @@
 
 	<!-- Enable annotation driven controllers, validation etc... -->
 
+	<context:component-scan base-package="org.bridgelabz.controllers" />
+	<context:component-scan base-package="org.bridgelabz.socialcontrollers" />
 
 
-	<context:component-scan base-package="org.bridgelabz" />
 	<mvc:annotation-driven />
 	<bean id="fileValidator" class="org.bridgelabz.validator.FileValidator" />
 	<bean id="viewResolver"

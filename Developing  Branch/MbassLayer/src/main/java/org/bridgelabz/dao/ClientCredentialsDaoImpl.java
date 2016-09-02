@@ -1,13 +1,15 @@
 package org.bridgelabz.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bridgelabz.model.ClientCredentialsModel;
+import org.bridgelabz.model.FacebookDetails;
+import org.bridgelabz.service.ClientDetails;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 /*implements ClientCredentialsModelDao.
  *created: Aug 18, 2016 11:33AM
@@ -18,7 +20,8 @@ public class ClientCredentialsDaoImpl implements ClientCredentialsDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	Session session ;
+	Session session;
+
 	public void addClientCredentials(ClientCredentialsModel clientcredentialmodel) {
 		sessionFactory.openSession().save(clientcredentialmodel);
 
@@ -47,19 +50,40 @@ public class ClientCredentialsDaoImpl implements ClientCredentialsDao {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see org.bridgelabz.dao.ClientCredentialsDao#getId(java.lang.String)
-	 */
+	// getting the clientid and Client passwords Here
+	public ArrayList<String> credentials(String projectname, String appType) {
+		String appId;
+		String appSecret;
+		ArrayList<String> arrayList=new ArrayList<String>();
+		Session s = sessionFactory.openSession();
+		System.err.println("project name and provider:"+projectname+ " "+ appType);
+		Query query = s.createQuery("from ClientCredentialsModel where projectName = ? and provider = ?");
+		query.setParameter(0, projectname);
+		query.setParameter(1, appType);
+		List<ClientCredentialsModel> list = query.list();
+		for (ClientCredentialsModel fd : list) {
+			appId = fd.getClientid();
+			appSecret=fd.getClientpassword();
+			System.out.println("app id and secret:"+appId +" "+appSecret);
+			arrayList.add(appId);
+			arrayList.add(appSecret);
+		}
+		return arrayList;
+	}
+
+	// getting accesstoken from here
 	@Override
-	public String getId(String provider) {
-		System.out.println(provider);
-		session = sessionFactory.openSession();
-		String hql2 = "SELECT C.clientid FROM ClientCredentialsModel C where C.provider="+provider;
-		Query query=session.createQuery(hql2);
-		List results = query.list();
-		System.out.println(results.toString());
-		
-		return provider;
+	public String AccessToken(String projectname, String tableName) {
+		String accessToken = "";
+		Session s = sessionFactory.openSession();
+		Query query = s.createQuery("from " + tableName + " where projectName = ?");
+		query.setParameter(0, projectname);
+		List<FacebookDetails> list = query.list();
+		for (FacebookDetails fd : list) {
+			accessToken = fd.getAccessToken();
+		}
+		System.out.println("access token:" + accessToken);
+		return accessToken;
 	}
 
 }

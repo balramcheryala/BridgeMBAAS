@@ -45,7 +45,7 @@ public class Dashboard {
 	static final String PASS = "ammy";
 
 	String k;
-	static String globalname;
+	public static String globalname;
 
 	@RequestMapping(value = "/overview")
 	public ModelAndView displaydashboard(@RequestParam(value = "projectname", required = true) String pName,

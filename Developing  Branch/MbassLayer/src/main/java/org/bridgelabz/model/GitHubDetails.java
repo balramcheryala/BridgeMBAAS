@@ -12,7 +12,6 @@ import javax.persistence.Table;
  *Created By: Balram
  */
 
-
 @Entity
 @Table(name = "GitHubDetails")
 public class GitHubDetails {
@@ -21,8 +20,44 @@ public class GitHubDetails {
 	@Column(name = "id")
 	private Integer id;
 
+	@Column(name = "accessToken")
+	private String accessToken;
+
+	@Column(name = "projectName")
+	private String projectName;;
+
+	/**
+	 * @return the projectName
+	 */
+	public String getProjectName() {
+		return projectName;
+	}
+
+	/**
+	 * @param projectName the projectName to set
+	 */
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	/**
+	 * @return the accessToken
+	 */
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	/**
+	 * @param accessToken
+	 *            the accessToken to set
+	 */
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
 	@Column(name = "name")
 	private String name;
+
 	public String getName() {
 		return name;
 	}

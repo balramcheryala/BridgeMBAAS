@@ -31,6 +31,23 @@ public class TwitterDetails {
 	@Column(name = "ScreenName")
 	private String ScreenName;
 
+	@Column(name = "accessToken")
+	private String accessToken;
+	
+	/**
+	 * @return the accessToken
+	 */
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	/**
+	 * @param accessToken the accessToken to set
+	 */
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
 	public String getScreenName() {
 		return ScreenName;
 	}

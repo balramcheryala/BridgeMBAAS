@@ -50,7 +50,7 @@ div#topdiv {
 		<br>
 		<center>
 			<h1 class="main">
-				<font color=navy>WELCOME TO MBASS LAYER !!!</font>
+				<font color=navy>WELCOME TO BridgeMbaaS Layer...!</font>
 			</h1>
 		</center>
 		<!-- <div class="col-sm-6"> -->

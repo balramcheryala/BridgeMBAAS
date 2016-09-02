@@ -1,10 +1,6 @@
-<%@page import="org.bridgelabz.connection.GoogleConnection"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%
-	GoogleConnection google = new GoogleConnection();
-%>
 <html>
 <title>BridgeMbaas</title>
 <head>
@@ -67,7 +63,7 @@ body {
 				<div class="btn-group">
 					<a class='btn btn-danger disabled'><i class="fa fa-google-plus"
 						style="width: 16px; height: 20px"></i></a> <a class='btn btn-danger'
-						href='<%=google.getAuthUrl()%>' style="width: 12em;"> Sign in
+						href='/MbassLayer/googlesignin' style="width: 12em;"> Sign in
 						with Google</a>
 				</div>
 			</form>

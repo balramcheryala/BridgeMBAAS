@@ -1,10 +1,5 @@
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <html>
-<title>Post</title>
+<title>Client Rest API</title>
 <head>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -35,24 +30,45 @@
 
 <body>
 	<center>
-		<br /> <br />
-		<div class="btn-group">
-
-			<a class='btn btn-default disabled'><i class="fa fa-gittip"
-				style="width: 20px; height: 20px"></i></a> <a class='btn btn-default'
-				href='#' style="width: 90em;"> Please Login To Twitter And Post ...:)</a>
-		</div>
-		<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
 	
-
+	<br /> <br />
+		<div class="btn-group">
+			<a class='btn btn-info'><i class="fa fa-twitter"
+				style="width: 16px; height: 20px"></i></a> <a class='btn btn-info '
+				href='#' style="width: 12em"> Before Going to Post Please sign in to Providers</a>
+		</div>
+		<br /> <br />
 		<div class="btn-group">
 			<a class='btn btn-info'><i class="fa fa-twitter"
 				style="width: 16px; height: 20px"></i></a> <a class='btn btn-info '
 				href='/MbassLayer/signin' style="width: 12em"> Sign in with
 				Twitter</a>
 		</div>
-		
-		
-	</center>
+		<br /> <br />
+		<div class="btn-group">
+			<a class='btn btn-primary disabled'><i class="fa fa-facebook"
+				style="width: 16px; height: 20px"></i></a> <a class='btn btn-primary '
+				href='/MbassLayer/facebookrequest' style="width: 12em"> Sign in
+				with Facebook</a>
+		</div>
+		<br /> <br />
+
+		<div class="btn-group">
+			<a class='btn btn-info'><i class="fa fa-twitter"
+				style="width: 16px; height: 20px"></i></a> <a class='btn btn-info '
+				href='/MbassLayer/twitterpost' style="width: 12em">TWITTER POST</a>
+		</div>
+		<br /> <br />
+		<div class="btn-group">
+			<a class='btn btn-primary'><i class="fa fa-facebook"
+				style="width: 16px; height: 20px"></i></a> <a class='btn btn-primary '
+				href='/MbassLayer/fbpost' style="width: 12em">FACEBOOK POST</a>
+		</div>
+		<br /> <br /> <br /> <br />
+		<div class="btn-group">
+			<a class='btn btn-warning'><i class="fa fa-bell"
+				style="width: 16px; height: 20px"></i></a> <a class='btn btn-warning '
+				href='/MbassLayer/bufferget' style="width: 12em">BUFFER POST</a>
+		</div>
 </body>
 </html>
