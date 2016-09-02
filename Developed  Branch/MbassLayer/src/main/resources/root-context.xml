@@ -70,6 +70,7 @@
 	<bean id="linkedin" class="org.bridgelabz.socialcontrollers.LinkedINController" />
 	<bean id="google" class="org.bridgelabz.socialcontrollers.GoogleController" />
 	<bean id="github" class="org.bridgelabz.socialcontrollers.GitHubController" />
+	<bean id="errorhandler" class="org.bridgelabz.socialcontrollers.CustomExceptionHandler" />
 
 
 

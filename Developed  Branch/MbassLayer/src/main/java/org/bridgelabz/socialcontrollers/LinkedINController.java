@@ -20,13 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.bridgelabz.controllers.Dashboard;
 import org.bridgelabz.dao.ClientCredentialsDao;
-import org.bridgelabz.graph.LinkedInGraph;
 import org.bridgelabz.model.LinkedInDetails;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,6 +56,7 @@ public class LinkedINController {
 	public static String LK_REDIRECT_URI = "http://localhost:8086/MbassLayer/linkedin";
 
 	// Invoking a authentication url
+	@RequestMapping("linkedinrequest")
 	public String getAuthUrl() {
 		String LoginUrl = "";
 		try {
@@ -82,7 +83,7 @@ public class LinkedINController {
 
 		// getting accesstoken here by exchanging the autherization code with
 		// provider
-		String accessToken = getAccessToken(code);
+		accessToken = getAccessToken(code);
 
 		try {
 			jsonObj = new JSONObject(accessToken);
@@ -90,13 +91,11 @@ public class LinkedINController {
 			// paasing the accesstoken to LinkedInGraph graph method to access
 			// the user
 			// details
-			LinkedInGraph Graph = new LinkedInGraph(jsonObj.get("access_token").toString());
-			// getting the graph user in json format
-			String graph = Graph.getGraph();
+
 			// passing the graph to get graph data for getting the graph from
 			// given
 			// json fromat
-			Map<String, String> ProfileData = Graph.getGraphData(graph);
+			Map<String, String> ProfileData = getGraphData(jsonObj.get("access_token").toString());
 			// Parsed Data Storing into the DataBase
 			session = sessionFactory.openSession();
 			LinkedInDetails details = new LinkedInDetails();

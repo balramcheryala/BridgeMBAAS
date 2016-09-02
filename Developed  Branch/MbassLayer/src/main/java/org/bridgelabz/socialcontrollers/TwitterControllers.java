@@ -130,30 +130,4 @@ public class TwitterControllers {
 		return new ModelAndView("DataSaved", map);
 	}
 
-	// Request Mapping For Twitterpost
-
-	@RequestMapping(value = "/twitterpost", method = RequestMethod.POST)
-	public ModelAndView playersList(@RequestParam(value = "tweet", required = true) String post)
-			throws TwitterException {
-		System.out.println(post);
-		StatusUpdate status = new StatusUpdate(post);
-
-		twitter.updateStatus(status);
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("msg", "Successfully posted To Twitter");
-		return new ModelAndView("tweetsuccess", map);
-	}
-
-	// Method For Upload Pic For Twitter
-
-	public void uploadPic(File file, String message) throws Exception {
-		try {
-			StatusUpdate status = new StatusUpdate(message);
-			status.setMedia(file);
-			twitter.updateStatus(status);
-		} catch (TwitterException e) {
-			e.printStackTrace();
-		}
-	}
-
 }

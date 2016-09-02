@@ -30,12 +30,13 @@
 
 <body>
 	<center>
-	
-	<br /> <br />
+
+		<br /> <br />
 		<div class="btn-group">
 			<a class='btn btn-info'><i class="fa fa-twitter"
 				style="width: 16px; height: 20px"></i></a> <a class='btn btn-info '
-				href='#' style="width: 12em"> Before Going to Post Please sign in to Providers</a>
+				href='#' style="width: 12em"> Before Going to Post Please sign
+				in to Providers</a>
 		</div>
 		<br /> <br />
 		<div class="btn-group">
@@ -70,5 +71,29 @@
 				style="width: 16px; height: 20px"></i></a> <a class='btn btn-warning '
 				href='/MbassLayer/bufferget' style="width: 12em">BUFFER POST</a>
 		</div>
+
+
+
+		<div class="widget" align="center" style="height: 525px">
+			<h2 style="color: #803540">Please select a file to upload..!</h2>
+			<br />
+			<form:form method="post" enctype="multipart/form-data"
+				modelAttribute="uploadedFile" action="postupload">
+				<table>
+					<tr>
+						<td><b style="color: red">Upload File:</b></td>
+						<td><input type="file" name="file" /></td>
+						<td style="color: red; font-style: italic;"><form:errors
+								path="file" /></td>
+					</tr>
+					<tr>
+						<td><input class="button" type="submit" value="Upload" /></td>
+					</tr>
+				</table>
+			</form:form>
+		</div>
+</body>
+</html>
+
 </body>
 </html>

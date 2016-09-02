@@ -1,5 +1,6 @@
 package org.bridgelabz.socialcontrollers;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import twitter4j.StatusUpdate;
-import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
 /*Class ClientDetailsBean.
@@ -36,11 +36,21 @@ public class BufferController {
 	@Autowired
 	ClientCredentialsDao dao;
 
-	// Facebook AccessToken
-	String facebookAccessToken;
+	File file = new File("/home/bridgelabz/Desktop/qwerty.jpg");
+	// Request Mapping For Twitterpost
 
-	// Twitter AccessToken
-	Twitter twitter;
+	@RequestMapping(value = "/twitterpost", method = RequestMethod.POST)
+	public ModelAndView playersList(@RequestParam(value = "tweet", required = true) String post)
+			throws TwitterException {
+		System.out.println(post);
+		StatusUpdate status = new StatusUpdate(post);
+
+		TwitterControllers.twitter.updateStatus(status);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("msg", "Successfully uploaded  To Twitter");
+		return new ModelAndView("tweetsuccess", map);
+	}
+
 	/*
 	 * FaceBook Post
 	 */
@@ -87,4 +97,15 @@ public class BufferController {
 		return new ModelAndView("bufferpost", map);
 	}
 
+	// Method For Upload Pic For Twitter
+	@RequestMapping(value = "/picupload")
+	public void uploadPic() throws Exception {
+		try {
+			StatusUpdate status = new StatusUpdate(null);
+			status.setMedia(file);
+			TwitterControllers.twitter.updateStatus(status);
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+	}
 }

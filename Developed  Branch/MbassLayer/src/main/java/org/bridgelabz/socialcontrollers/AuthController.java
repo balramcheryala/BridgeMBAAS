@@ -193,6 +193,7 @@ public class AuthController {
 		model.put("student", preparation.prepareCrudBean(detailservice.getClientDetails(clientdetailsbean.getId())));
 		model.put("crud", preparation.prepareListofBean(detailservice.listClientDetails()));
 		model.put("title", "BRIDGEMBASS");
+
 		return new ModelAndView("editdetails", model);
 	}
 

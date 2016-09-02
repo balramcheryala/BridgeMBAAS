@@ -24,9 +24,12 @@
 <body>
 	<div class="main-wrapper">
 		<div class="app" id="app">
-			<header class="header">
-			<div class="header-block header-block-collapse hidden-lg-up">
-		
+			
+
+
+			<div class="header-block header-block-nav">
+	
+					
 			<aside class="sidebar">
 			<div class="sidebar-container">
 				<div class="sidebar-header">
@@ -55,7 +58,7 @@
 							DataBase
 					</a></li>
 						<li><a href="testdemo"> <i class="fa fa-twitter"></i>
-							Post
+							Post</a>
 			</aside>
 			<div class="sidebar-overlay" id="sidebar-overlay"></div>
 			<article class="content item-editor-page">
@@ -65,35 +68,42 @@
 				</h3>
 			</div>
 			<div class="auth-content">
-				<h1 style="color: #FF5733">Edit Data</h1>
-				<form:form method="POST" action="update">
+				<p class="text-xs-center">Edit Email Id And Password</p>
+
+				<form:form method="POST" action="save">
+
 					<div class="form-group">
 						<label for="email">Email</label>
-						<form:input path="email" value="${student.email}"
-							class="form-control underlined" />
-					</div>
-					<div class="form-group">
-						<label for="password">Password</label>
-						<form:input path="password" value="${student.password}"
-							class="form-control underlined" />
+						<form:input path="email" class="form-control underlined"
+							value="${student.email}" />
 					</div>
 
-					<button type="submit" class="btn btn-block btn-primary">Submit</button>
+					<div class="form-group">
+						<label for="password">Password</label>
+						<form:input path="password" class="form-control underlined"
+							value="${student.password}" />
+					</div>
+					
+					<button type="submit" class="btn btn-block btn-primary">Sumbit</button>
 				</form:form>
 			</div>
-			</article>
+
+			<!-- Reference block for JS -->
+			<div class="ref" id="ref">
+				<div class="color-primary"></div>
+				<div class="chart">
+					<div class="color-primary"></div>
+					<div class="color-secondary"></div>
+				</div>
+			</div>
+			<script type="text/javascript"
+				src="<c:url value="/resources/js/vendor.js" />"></script>
 		</div>
-	</div>
 </body>
-<!-- Reference block for JS -->
-<div class="ref" id="ref">
-	<div class="color-primary"></div>
-	<div class="chart">
-		<div class="color-primary"></div>
-		<div class="color-secondary"></div>
-	</div>
-</div>
-<script type="text/javascript"
-	src="<c:url value="/resources/js/vendor.js" />"></script>
-</div>
+
 </html>
+
+
+
+
+

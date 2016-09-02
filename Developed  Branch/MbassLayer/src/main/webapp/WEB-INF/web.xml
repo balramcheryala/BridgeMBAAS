@@ -15,6 +15,7 @@
 	<url-pattern>/twitterpost</url-pattern>
 	<url-pattern>/facebookpost</url-pattern>
 	
+	<url-pattern>/picupload</url-pattern>
 	<url-pattern>/linkedinrequest</url-pattern>
 	<url-pattern>/githubrequest</url-pattern>
 	<url-pattern>/facebookrequest</url-pattern>
@@ -68,6 +69,7 @@
 	<url-pattern>/LINKEDIN</url-pattern>
 	<url-pattern>/TWITTER</url-pattern>
 	<url-pattern>/poverview</url-pattern>
+	<url-pattern>/error</url-pattern>
 	<url-pattern>/**</url-pattern>
 	</servlet-mapping>
 	<listener>
@@ -75,7 +77,27 @@
             org.springframework.web.context.ContextLoaderListener
         </listener-class>
     </listener>
-   
+
+<!-- Prior to Servlet 3.0 define either an error-code or an exception-type but not both -->
+ <error-page>
+  <!-- Define error page to react on Java exception -->
+  <exception-type>java.lang.Throwable</exception-type>
+  <!-- The location of the resource to display in response to the error will point to the Spring MVC handler method -->
+  <location>/error</location>
+ </error-page>
+ <error-page>
+  <error-code>404</error-code>
+  <location>/error</location>
+ </error-page>
+ <error-page>
+  <error-code>500</error-code>
+  <location>/error</location>
+ </error-page>
+
+ <!-- With Servlet 3.0 and above general error page is possible -->
+ <error-page>
+  <location>/error</location>
+ </error-page>
 	<context-param>
         <param-name>contextConfigLocation</param-name>
      <param-value>

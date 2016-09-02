@@ -75,13 +75,13 @@
 					<div class="form-group">
 						<label for="email">Email</label>
 						<form:input path="email" class="form-control underlined"
-							value="${crud.email}" />
+							value="${email}" />
 					</div>
 
 					<div class="form-group">
 						<label for="password">Password</label>
 						<form:input path="password" class="form-control underlined"
-							value="${crud.password}" />
+							value="${password}" />
 					</div>
 					
 					<button type="submit" class="btn btn-block btn-primary">Sumbit</button>
